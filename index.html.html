@@ -527,6 +527,18 @@
         
         <!-- LEFT SIDEBAR: LIST OF DAYS -->
         <div class="lg:col-span-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-[calc(100vh-280px)] min-h-[450px] lg:min-h-[600px] flex flex-col">
+          
+          <!-- GENERATE NEW MONTH BANNER (Hidden by default) -->
+          <div id="generate-banner" class="hidden mb-4 bg-gradient-to-r from-brand-600 to-brand-800 text-white rounded-xl p-4 shadow-lg items-center justify-between gap-3 transition-all">
+            <div>
+              <span class="text-[10px] font-black uppercase tracking-wider text-brand-200 block mb-0.5">Target Tercapai! 🎉</span>
+              <p class="text-xs font-medium">Sudah masak 25+ menu. Siap untuk bulan depan?</p>
+            </div>
+            <button onclick="showGenerateModal()" class="flex-shrink-0 bg-white text-brand-700 hover:bg-brand-50 font-bold text-xs px-3 py-2 rounded-lg shadow-sm transition-transform hover:scale-105 whitespace-nowrap">
+              Buat Baru
+            </button>
+          </div>
+
           <!-- Filter & Search -->
           <div class="mb-4 space-y-2">
             <div class="relative">
@@ -623,6 +635,22 @@
   <!-- Custom Alert Banner instead of browser alert -->
   <div id="custom-toast" class="fixed top-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-xl z-50 flex items-center gap-3 transition-all transform scale-90 opacity-0 pointer-events-none">
     <span id="toast-message" class="text-sm font-semibold">Resep berhasil disalin!</span>
+  </div>
+
+  <!-- Custom Confirmation Modal (For Generate Menu) -->
+  <div id="custom-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 transition-all opacity-0 pointer-events-none">
+    <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm" onclick="hideGenerateModal()"></div>
+    <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6 relative z-10 transform scale-95 transition-all" id="modal-content">
+      <div class="w-12 h-12 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mb-4 mx-auto">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+      </div>
+      <h3 class="text-lg font-bold text-center text-gray-900 mb-2">Generate Menu Baru?</h3>
+      <p class="text-sm text-gray-500 text-center mb-6">Sistem akan mereset progress dan mengacak ulang susunan jadwal menu masakan Anda dengan metode <i>Smart Shuffling</i>.</p>
+      <div class="flex gap-3">
+        <button onclick="hideGenerateModal()" class="flex-1 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-bold rounded-xl transition-colors">Batal</button>
+        <button onclick="generateNewMenu()" class="flex-1 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold rounded-xl transition-colors shadow-lg shadow-brand-500/30">Ya, Generate!</button>
+      </div>
+    </div>
   </div>
 
   <!-- SOUND FOR TIMER (using Web Audio API to prevent external resource problems) -->
@@ -2707,6 +2735,16 @@
       // dasharray of circle radius 20 is 2*PI*r = ~125.6
       const offset = 125.6 - (125.6 * percentage) / 100;
       document.getElementById('progressCircle').setAttribute('stroke-dashoffset', offset);
+
+      // Show/Hide Generate Banner based on 25+ cooks
+      const banner = document.getElementById('generate-banner');
+      if (cookedCount >= 25) {
+        banner.classList.remove('hidden');
+        banner.classList.add('flex');
+      } else {
+        banner.classList.add('hidden');
+        banner.classList.remove('flex');
+      }
     }
 
     // ----------------------------------------------------
@@ -2898,6 +2936,79 @@
     function toggleTimerCollapse() {
       const ext = document.getElementById('timer-expanded');
       ext.classList.toggle('hidden');
+    }
+
+    // ----------------------------------------------------
+    // GENERATE NEW MONTH MENU LOGIC (SMART SHUFFLING)
+    // ----------------------------------------------------
+    function showGenerateModal() {
+      const modal = document.getElementById('custom-modal');
+      const content = document.getElementById('modal-content');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      content.classList.remove('scale-95');
+      content.classList.add('scale-100');
+    }
+
+    function hideGenerateModal() {
+      const modal = document.getElementById('custom-modal');
+      const content = document.getElementById('modal-content');
+      content.classList.remove('scale-100');
+      content.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+      }, 200);
+    }
+
+    function generateNewMenu() {
+      hideGenerateModal();
+      
+      // 1. Clear cooked progress
+      cookedDays.clear();
+      
+      // 2. Separate into "Kering" (Dry) and "Berkuah" (Soup)
+      let kering = menuData.filter(r => r.type === "Kering");
+      let kuah = menuData.filter(r => r.type === "Berkuah" || r.type === "Berkuah ");
+      
+      // Safety fallback
+      if (kering.length === 0) kering = menuData.filter(r => r.id % 2 !== 0);
+      if (kuah.length === 0) kuah = menuData.filter(r => r.id % 2 === 0);
+
+      // 3. Randomize both arrays (Fisher-Yates Shuffle)
+      for (let i = kering.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [kering[i], kering[j]] = [kering[j], kering[i]];
+      }
+      for (let i = kuah.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [kuah[i], kuah[j]] = [kuah[j], kuah[i]];
+      }
+
+      // 4. Interleave Kering & Kuah back into a new sequence
+      const newMenu = [];
+      const maxLength = Math.max(kering.length, kuah.length);
+      for (let i = 0; i < maxLength; i++) {
+        if (kering[i]) newMenu.push(kering[i]);
+        if (kuah[i]) newMenu.push(kuah[i]);
+      }
+
+      // 5. Reassign IDs 1 to 30 based on new position
+      newMenu.forEach((recipe, index) => {
+        recipe.id = index + 1;
+      });
+
+      // 6. Overwrite old array
+      menuData.length = 0;
+      menuData.push(...newMenu);
+
+      // 7. Reset UI state
+      setFilter('semua');
+      document.getElementById('menu-search').value = '';
+      renderDaysList();
+      loadRecipe(1);
+      updateProgress();
+      
+      // Inform the user beautifully
+      showToast("✨ Susunan jadwal bulan baru berhasil dibuat!");
     }
   </script>
 </body>
