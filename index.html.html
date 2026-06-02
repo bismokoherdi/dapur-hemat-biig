@@ -236,21 +236,18 @@
         grid-template-columns: minmax(0, 1fr) !important;
       }
       #view-menu > div:first-child {
-        height: auto !important;
+        height: 380px !important;
         min-height: 0 !important;
       }
       #days-list-container {
-        display: grid !important;
-        grid-auto-flow: column;
-        grid-auto-columns: minmax(230px, 38vw);
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
+        display: flex !important;
+        flex-direction: column;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
         padding: 4px 2px 10px 2px;
-        scroll-snap-type: x proximity;
       }
       #days-list-container button {
-        min-height: 86px;
-        scroll-snap-align: start;
+        min-height: 76px;
       }
       #days-list-container button .text-xs {
         font-size: 0.78rem !important;
@@ -363,8 +360,8 @@
         font-size: 2.2rem !important;
       }
       #view-menu > div:first-child {
-        height: auto !important;
-        max-height: 520px;
+        height: 380px !important;
+        max-height: none;
       }
       #app > .flex.border-b {
         position: relative;
@@ -385,9 +382,6 @@
       #view-grocery > div,
       #view-guides > div {
         padding: 14px !important;
-      }
-      #days-list-container {
-        grid-auto-columns: minmax(218px, 82vw);
       }
       #menu-search {
         font-size: 16px !important;
