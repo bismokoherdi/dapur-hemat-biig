@@ -1,0 +1,2906 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dapur Hemat BIIG Home - Planner Menu 30 Hari</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f1faf6',
+              100: '#dcefe8',
+              200: '#b7ddd0',
+              500: '#2f8a7d',
+              600: '#26776d',
+              700: '#215f59',
+              800: '#1f4d49',
+              900: '#183c39',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background:
+        linear-gradient(180deg, rgba(247, 249, 245, 0.92), rgba(249, 250, 251, 0.98) 420px),
+        radial-gradient(circle at 20% 0%, rgba(232, 180, 92, 0.18), transparent 28%),
+        #f7f5ef;
+      color: #24312f;
+    }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+    :root {
+      --ink: #24312f;
+      --muted: #66716d;
+      --line: rgba(36, 49, 47, 0.1);
+      --paper: rgba(255, 255, 255, 0.86);
+      --sage: #26776d;
+      --sun: #d9912b;
+      --tomato: #c95f4a;
+    }
+    * {
+      letter-spacing: 0;
+    }
+    .rounded-2xl,
+    .rounded-xl,
+    .rounded-lg {
+      border-radius: 8px !important;
+    }
+    #app {
+      max-width: 1360px;
+      padding-top: 20px;
+    }
+    header {
+      position: relative;
+      overflow: hidden;
+      min-height: 214px;
+      border: 0 !important;
+      box-shadow: 0 20px 60px rgba(33, 52, 48, 0.14) !important;
+      background:
+        linear-gradient(90deg, rgba(22, 42, 38, 0.92) 0%, rgba(22, 42, 38, 0.7) 44%, rgba(22, 42, 38, 0.22) 100%),
+        url('https://images.unsplash.com/photo-1543353071-10c8ba85a904?auto=format&fit=crop&w=1600&q=80') center 46% / cover !important;
+    }
+    header > div {
+      position: relative;
+      z-index: 1;
+    }
+    header h1 {
+      color: #fff !important;
+      font-size: clamp(2rem, 3vw, 3.65rem) !important;
+      line-height: 0.98 !important;
+      max-width: 760px;
+    }
+    header p {
+      color: rgba(255, 255, 255, 0.82) !important;
+      max-width: 620px;
+      font-size: 0.98rem !important;
+    }
+    header span[class*="bg-brand"],
+    header span[class*="bg-amber"] {
+      background: rgba(255, 255, 255, 0.14) !important;
+      color: #fff !important;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      backdrop-filter: blur(12px);
+    }
+    header .bg-gray-50 {
+      background: rgba(255, 255, 255, 0.16) !important;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.22) !important;
+      backdrop-filter: blur(14px);
+    }
+    header .text-gray-900,
+    header .text-gray-800 {
+      color: #fff !important;
+    }
+    header .text-gray-500 {
+      color: rgba(255, 255, 255, 0.72) !important;
+    }
+    header .text-gray-200 {
+      color: rgba(255, 255, 255, 0.22) !important;
+    }
+    header .text-brand-600 {
+      color: #f7c66a !important;
+    }
+    #app > .flex.border-b {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 6px;
+      border: 1px solid var(--line) !important;
+      background: rgba(255, 255, 255, 0.84);
+      backdrop-filter: blur(14px);
+      border-radius: 8px;
+      box-shadow: 0 12px 34px rgba(33, 52, 48, 0.08);
+    }
+    #app > .flex.border-b button {
+      border: 0 !important;
+      border-radius: 6px !important;
+      min-height: 42px;
+    }
+    #tab-menu.text-brand-700,
+    #tab-grocery.text-brand-700,
+    #tab-guides.text-brand-700 {
+      background: #183c39 !important;
+      color: #fff !important;
+      box-shadow: 0 8px 20px rgba(24, 60, 57, 0.18);
+    }
+    input,
+    button {
+      transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+    }
+    button:hover {
+      transform: translateY(-1px);
+    }
+    input {
+      background: #fff !important;
+      border-color: var(--line) !important;
+      min-height: 42px;
+    }
+    input:focus {
+      box-shadow: 0 0 0 4px rgba(47, 138, 125, 0.16) !important;
+    }
+    #view-menu > div:first-child,
+    #active-recipe-card,
+    #view-grocery > div,
+    #view-guides > div {
+      background: var(--paper) !important;
+      border-color: var(--line) !important;
+      box-shadow: 0 16px 44px rgba(33, 52, 48, 0.08) !important;
+      backdrop-filter: blur(8px);
+    }
+    #view-menu > div:first-child {
+      height: calc(100vh - 250px) !important;
+    }
+    #days-list-container button {
+      border-color: rgba(36, 49, 47, 0.08) !important;
+    }
+    #days-list-container button:hover {
+      box-shadow: 0 10px 24px rgba(33, 52, 48, 0.08);
+    }
+    #active-recipe-card > div:first-child {
+      background:
+        linear-gradient(135deg, rgba(47, 138, 125, 0.11), rgba(217, 145, 43, 0.12)) !important;
+    }
+    #active-recipe-card h2 {
+      color: #152523 !important;
+    }
+    #active-recipe-card .bg-white,
+    #view-grocery .bg-gray-50,
+    #view-guides .bg-white {
+      border-color: rgba(36, 49, 47, 0.08) !important;
+    }
+    #dynamic-cost-display {
+      background: #f1faf6 !important;
+      border-color: rgba(38, 119, 109, 0.18) !important;
+    }
+    #global-timer {
+      background: #152523 !important;
+      box-shadow: 0 18px 48px rgba(21, 37, 35, 0.24) !important;
+    }
+    #custom-toast {
+      background: #152523 !important;
+    }
+    @media (max-width: 1024px) {
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        padding-bottom: 88px !important;
+      }
+      #app {
+        max-width: 100%;
+      }
+      header {
+        min-height: 230px;
+        padding: 22px !important;
+      }
+      header > div {
+        gap: 22px !important;
+      }
+      header h1 {
+        font-size: clamp(2.15rem, 6vw, 3.1rem) !important;
+      }
+      header p {
+        font-size: 1rem !important;
+        line-height: 1.7 !important;
+      }
+      #app > .flex.border-b {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 6px !important;
+      }
+      #app > .flex.border-b button {
+        flex: 0 0 auto;
+        min-height: 48px;
+        padding: 0 16px !important;
+        scroll-snap-align: start;
+        font-size: 0.9rem !important;
+      }
+      #view-menu {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      #view-menu > div:first-child {
+        height: auto !important;
+        min-height: 0 !important;
+      }
+      #days-list-container {
+        display: grid !important;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(230px, 38vw);
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        padding: 4px 2px 10px 2px;
+        scroll-snap-type: x proximity;
+      }
+      #days-list-container button {
+        min-height: 86px;
+        scroll-snap-align: start;
+      }
+      #days-list-container button .text-xs {
+        font-size: 0.78rem !important;
+      }
+      #active-recipe-card .md\:grid-cols-12,
+      #view-guides.md\:grid-cols-3 {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      #active-recipe-card .md\:col-span-5,
+      #active-recipe-card .md\:col-span-7,
+      #view-guides .md\:col-span-1,
+      #view-guides .md\:col-span-2 {
+        grid-column: auto !important;
+      }
+      #active-recipe-card p,
+      #active-recipe-card li,
+      #view-grocery li,
+      #guide-content-area li,
+      #guide-content-area p {
+        font-size: 0.95rem !important;
+        line-height: 1.75 !important;
+      }
+      #active-recipe-card h2 {
+        font-size: clamp(1.35rem, 4vw, 1.75rem) !important;
+        line-height: 1.25 !important;
+      }
+      #active-recipe-card h3,
+      #guide-content-area h2,
+      #view-grocery h2 {
+        font-size: 1.05rem !important;
+        line-height: 1.35 !important;
+      }
+      #active-recipe-card span,
+      #view-grocery span,
+      #view-guides span {
+        line-height: 1.45;
+      }
+      #active-recipe-card button,
+      #view-grocery button,
+      #view-guides button,
+      #global-timer button {
+        min-height: 44px;
+      }
+      #active-recipe-card .grid.grid-cols-2.sm\:grid-cols-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+      #active-recipe-card .grid.grid-cols-3 {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      #active-recipe-card ol li {
+        gap: 12px !important;
+      }
+      #active-recipe-card ol li > button {
+        width: 34px !important;
+        height: 34px !important;
+        min-height: 34px !important;
+        font-size: 0.82rem !important;
+      }
+      #view-grocery #grocery-lists {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      #view-guides > div:first-child {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+      #view-guides > div:first-child h3 {
+        grid-column: 1 / -1;
+      }
+      #view-guides > div:first-child button {
+        text-align: left;
+        min-height: 52px;
+      }
+      #global-timer {
+        left: auto;
+        right: 12px;
+        bottom: 12px;
+        max-width: 220px !important;
+        width: 220px;
+        padding: 12px !important;
+      }
+      #global-timer .gap-12 {
+        gap: 16px !important;
+      }
+      #global-timer span.text-xs {
+        font-size: 0.65rem !important;
+      }
+      #timer-display {
+        font-size: 1.45rem !important;
+      }
+      #global-timer button {
+        min-height: 32px;
+      }
+      #global-timer #timer-toggle-btn,
+      #global-timer button.bg-gray-800 {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+      }
+    }
+    @media (max-width: 768px) {
+      #app {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      header {
+        min-height: 260px;
+        background-position: center !important;
+      }
+      header h1 {
+        font-size: 2.2rem !important;
+      }
+      #view-menu > div:first-child {
+        height: auto !important;
+        max-height: 520px;
+      }
+      #app > .flex.border-b {
+        position: relative;
+      }
+      header > div > div:first-child > div:first-child {
+        align-items: flex-start !important;
+        flex-wrap: wrap;
+      }
+      header span[class*="bg-brand"],
+      header span[class*="bg-amber"] {
+        white-space: normal !important;
+      }
+      #view-menu {
+        gap: 14px !important;
+      }
+      #view-menu > div:first-child,
+      #active-recipe-card,
+      #view-grocery > div,
+      #view-guides > div {
+        padding: 14px !important;
+      }
+      #days-list-container {
+        grid-auto-columns: minmax(218px, 82vw);
+      }
+      #menu-search {
+        font-size: 16px !important;
+      }
+      #view-menu > div:first-child .grid.grid-cols-3 {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      #view-menu > div:first-child .grid.grid-cols-3 button {
+        min-height: 42px;
+        font-size: 0.86rem !important;
+      }
+      #active-recipe-card > div {
+        padding: 16px !important;
+      }
+      #active-recipe-card > div:first-child > div:first-child {
+        align-items: stretch !important;
+      }
+      #cooked-toggle-btn {
+        justify-content: center;
+        width: 100%;
+      }
+      #active-recipe-card .grid.grid-cols-2.sm\:grid-cols-4 {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+      #active-recipe-card .flex.items-center.justify-between.border-b {
+        align-items: flex-start !important;
+        gap: 12px;
+        flex-direction: column;
+      }
+      #active-recipe-card #portion-value {
+        min-width: 72px;
+        text-align: center;
+      }
+      #active-recipe-card .bg-amber-50\/50,
+      #active-recipe-card .bg-blue-50\/50,
+      #active-recipe-card .bg-gray-50 {
+        padding: 14px !important;
+      }
+      #view-guides > div:first-child {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      #guide-content-area,
+      #view-grocery > div {
+        padding: 18px !important;
+      }
+      #custom-toast {
+        width: calc(100vw - 24px);
+        justify-content: center;
+        text-align: center;
+      }
+    }
+    @media (max-width: 430px) {
+      header {
+        min-height: 290px;
+        padding: 18px !important;
+      }
+      header h1 {
+        font-size: 2rem !important;
+      }
+      header p {
+        font-size: 0.94rem !important;
+      }
+      #app > .flex.border-b button {
+        font-size: 0.84rem !important;
+        padding: 0 12px !important;
+      }
+      #active-recipe-card p,
+      #active-recipe-card li,
+      #view-grocery li,
+      #guide-content-area li,
+      #guide-content-area p {
+        font-size: 0.92rem !important;
+      }
+      #timer-display {
+        font-size: 1.35rem !important;
+      }
+      #global-timer {
+        max-width: 204px !important;
+        width: 204px;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen pb-12">
+
+  <!-- APP CONTAINER -->
+  <div id="app" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+    
+    <!-- HEADER -->
+    <header class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="bg-brand-100 text-brand-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+              <svg class="w-3 h-3 text-brand-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.9L10 1.154l7.834 3.746M2 7.02v6.43c0 1.293.754 2.463 1.94 3.03l6.06 2.91 6.06-2.91C17.246 15.913 18 14.743 18 13.45V7.02l-8 3.82-8-3.82z" clip-rule="evenodd"></path></svg>
+              Budget Rp100k / Hari (4 Orang)
+            </span>
+            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+              👶 Ramah Anak & Tanpa Pedas
+            </span>
+          </div>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-gray-950 tracking-tight">Dapur Hemat BIIG Home</h1>
+          <p class="text-gray-500 text-sm mt-1">Solusi menyusun menu 30 hari bergizi, hemat biaya, hemat gas, dan anti-bosan.</p>
+        </div>
+        
+        <!-- Quick progress indicator -->
+        <div class="bg-gray-50 rounded-xl p-3 border border-gray-100 flex items-center gap-3">
+          <div class="relative w-12 h-12 flex items-center justify-center">
+            <svg class="absolute w-full h-full transform -rotate-90">
+              <circle cx="24" cy="24" r="20" stroke="currentColor" class="text-gray-200" stroke-width="4" fill="transparent" />
+              <circle id="progressCircle" cx="24" cy="24" r="20" stroke="currentColor" class="text-brand-600" stroke-width="4" fill="transparent" stroke-dasharray="125.6" stroke-dashoffset="125.6" />
+            </svg>
+            <span id="progressText" class="text-xs font-bold text-gray-800">0/30</span>
+          </div>
+          <div>
+            <div class="text-xs font-bold text-gray-900">Perjalanan Memasak</div>
+            <div class="text-[10px] text-gray-500">Tandai menu yang sudah dimasak!</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <div class="flex border-b border-gray-200 mb-6 overflow-x-auto no-scrollbar gap-2">
+      <button onclick="switchTab('menu')" id="tab-menu" class="px-5 py-3 border-b-2 border-brand-600 font-bold text-sm text-brand-700 whitespace-nowrap flex items-center gap-2">
+        📅 Rencana 30 Hari
+      </button>
+      <button onclick="switchTab('grocery')" id="tab-grocery" class="px-5 py-3 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-800 hover:border-gray-300 whitespace-nowrap flex items-center gap-2">
+        🛒 Rekap Belanja Mingguan
+      </button>
+      <button onclick="switchTab('guides')" id="tab-guides" class="px-5 py-3 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-800 hover:border-gray-300 whitespace-nowrap flex items-center gap-2">
+        💡 Tips & Panduan Dapur
+      </button>
+    </div>
+
+    <!-- MAIN VIEWPORT -->
+    <main>
+      
+      <!-- ================== VIEW 1: MENU 30 HARI ================== -->
+      <div id="view-menu" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- LEFT SIDEBAR: LIST OF DAYS -->
+        <div class="lg:col-span-4 bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-[calc(100vh-280px)] min-h-[450px] lg:min-h-[600px] flex flex-col">
+          <!-- Filter & Search -->
+          <div class="mb-4 space-y-2">
+            <div class="relative">
+              <input type="text" id="menu-search" oninput="filterDays()" placeholder="Cari menu (misal: ayam, bakso)..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+              <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-1">
+              <button onclick="setFilter('semua')" id="btn-filter-semua" class="bg-brand-600 text-white font-bold text-xs py-1.5 px-2 rounded-lg transition-all">Semua</button>
+              <button onclick="setFilter('ganjil')" id="btn-filter-ganjil" class="bg-gray-100 text-gray-600 hover:bg-gray-200 font-semibold text-xs py-1.5 px-2 rounded-lg transition-all">Ganjil (Kering)</button>
+              <button onclick="setFilter('genap')" id="btn-filter-genap" class="bg-gray-100 text-gray-600 hover:bg-gray-200 font-semibold text-xs py-1.5 px-2 rounded-lg transition-all">Genap (Kuah)</button>
+            </div>
+          </div>
+
+          <!-- Day Selection List -->
+          <div id="days-list-container" class="flex-1 overflow-y-auto pr-1 space-y-2 no-scrollbar">
+            <!-- Dynamic Injection of Days -->
+          </div>
+        </div>
+
+        <!-- RIGHT AREA: ACTIVE RECIPE DETAILS -->
+        <div class="lg:col-span-8 space-y-6">
+          <div id="active-recipe-card" class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all duration-300">
+            <!-- Dynamic Recipe Content Loaded Here -->
+            <div class="p-12 text-center text-gray-400">
+              <svg class="w-16 h-16 mx-auto mb-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+              <p class="font-medium">Pilih hari untuk melihat resep masakan rumahan lezat, rincian biaya, porsi, dan tips memasak!</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================== VIEW 2: GROCERY RECAP ================== -->
+      <div id="view-grocery" class="hidden space-y-6">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+          <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+            🛒 Rekap Belanja Mingguan Tradisional
+          </h2>
+          <p class="text-sm text-gray-500 mb-6">Mengatur belanja setiap hari Minggu subuh di pasar tradisional adalah rahasia dapur hemat. Berikut rincian rekap belanja per minggu untuk 4 orang.</p>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="grocery-lists">
+            <!-- Programmatically injected weekly grocery plans -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ================== VIEW 3: GUIDES & WISDOM ================== -->
+      <div id="view-guides" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Sidebar Navigation for Guides -->
+        <div class="md:col-span-1 bg-white rounded-2xl shadow-sm border border-gray-100 p-4 h-fit space-y-1">
+          <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider px-3 mb-2">Panduan Kategori</h3>
+          <button onclick="selectGuide('bumbu')" id="btn-guide-bumbu" class="w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all bg-brand-50 text-brand-700">🧂 Bumbu Dasar Utama</button>
+          <button onclick="selectGuide('sayur')" id="btn-guide-sayur" class="w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-gray-50 text-gray-600">🥬 Sayuran Paling Hemat</button>
+          <button onclick="selectGuide('protein')" id="btn-guide-protein" class="w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-gray-50 text-gray-600">🥩 Protein Paling Murah</button>
+          <button onclick="selectGuide('mealprep')" id="btn-guide-mealprep" class="w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-gray-50 text-gray-600">⏱️ Meal Prep Kilat 1 Jam</button>
+          <button onclick="selectGuide('energy')" id="btn-guide-energy" class="w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-gray-50 text-gray-600">🔥 Trik Hemat Gas & Listrik</button>
+          <button onclick="selectGuide('kids')" id="btn-guide-kids" class="w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-gray-50 text-gray-600">👶 Mengatasi Anak GTM & Bosan</button>
+        </div>
+
+        <!-- Content Area for Guides -->
+        <div class="md:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6" id="guide-content-area">
+          <!-- Guide content injected here -->
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- FLOATING UTILITIES (Timer & Toast) -->
+  <!-- Interactive Timer -->
+  <div id="global-timer" class="fixed bottom-4 right-4 bg-gray-950 text-white rounded-2xl p-4 shadow-xl border border-gray-800 z-50 flex flex-col gap-2 max-w-xs transition-transform translate-y-32 md:translate-y-0 opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto">
+    <div class="flex items-center justify-between gap-12">
+      <span class="text-xs font-bold tracking-wide text-gray-400 flex items-center gap-1">
+        ⏱️ COOKING TIMER
+      </span>
+      <button onclick="toggleTimerCollapse()" class="text-gray-400 hover:text-white">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+      </button>
+    </div>
+    <div id="timer-expanded" class="space-y-3">
+      <div class="flex justify-center items-center gap-2">
+        <button onclick="adjustTimer(-60)" class="text-gray-400 hover:text-white p-1 text-lg font-bold">-</button>
+        <span id="timer-display" class="text-3xl font-mono font-bold tracking-wider text-brand-400">05:00</span>
+        <button onclick="adjustTimer(60)" class="text-gray-400 hover:text-white p-1 text-lg font-bold">+</button>
+      </div>
+      <div class="flex justify-center gap-2">
+        <button id="timer-toggle-btn" onclick="toggleTimer()" class="bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-all">Mulai</button>
+        <button onclick="resetTimer()" class="bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-bold px-4 py-1.5 rounded-lg transition-all">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Alert Banner instead of browser alert -->
+  <div id="custom-toast" class="fixed top-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-xl shadow-xl z-50 flex items-center gap-3 transition-all transform scale-90 opacity-0 pointer-events-none">
+    <span id="toast-message" class="text-sm font-semibold">Resep berhasil disalin!</span>
+  </div>
+
+  <!-- SOUND FOR TIMER (using Web Audio API to prevent external resource problems) -->
+  <script>
+    let audioCtx = null;
+    function playAlarm() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5 note
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      osc.start();
+      setTimeout(() => osc.stop(), 500);
+    }
+
+    // Custom Toast Function to replace alerts
+    function showToast(message) {
+      const toast = document.getElementById('custom-toast');
+      document.getElementById('toast-message').innerText = message;
+      toast.classList.remove('opacity-0', 'scale-90', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'scale-100');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'scale-90', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'scale-100');
+      }, 3000);
+    }
+  </script>
+
+  <!-- DATABASE AND APPLICATION SCRIPT -->
+  <script>
+    // ----------------------------------------------------
+    // MENU DATA MODEL
+    // ----------------------------------------------------
+    const menuData = [
+      {
+        id: 1,
+        name: "Ayam Goreng Mentega + Tumis Sawi Putih",
+        type: "Kering",
+        cost: 78000,
+        costDetails: [
+          { name: "Ayam 1 kg", price: 40000 },
+          { name: "Sawi Putih & Wortel", price: 8000 },
+          { name: "Bumbu & Margarin", price: 10000 },
+          { name: "Gas & Minyak (Alokasi)", price: 20000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ayam potong (potong kecil 12-14 bagian agar bumbu meresap)", qty: 1, unit: "kg" }
+        ],
+        veggies: [
+          { name: "Sawi putih (potong melintang 3cm)", qty: 400, unit: "gram" },
+          { name: "Wortel (kupas, iris tipis bulat)", qty: 100, unit: "gram" }
+        ],
+        spices: [
+          { name: "Margarin (untuk menumis ayam)", qty: 4, unit: "sdm" },
+          { name: "Bawang bombay (iris memanjang)", qty: 1, unit: "buah" },
+          { name: "Bawang putih (cincang halus)", qty: 4, unit: "siung" },
+          { name: "Kecap manis", qty: 5, unit: "sdm" },
+          { name: "Saus tiram", qty: 2, unit: "sdm" },
+          { name: "Kecap inggris (opsional, bisa diganti kecap asin + jeruk nipis)", qty: 1, unit: "sdm" },
+          { name: "Garam", qty: 1, unit: "sdt" },
+          { name: "Gula pasir", qty: 1, unit: "sdt" },
+          { name: "Merica bubuk", qty: 0.5, unit: "sdt" }
+        ],
+        steps: [
+          "Cuci bersih ayam yang sudah dipotong kecil, lalu tiriskan sampai benar-benar kering.",
+          "Panaskan 2 sdm minyak goreng dan 2 sdm margarin. Goreng ayam dengan api sedang sampai berkulit cokelat keemasan (sekitar 12 menit). Angkat, tiriskan.",
+          "Kurangi minyak sisa menggoreng, sisakan sekitar 2 sdm. Masukkan sisa margarin (2 sdm).",
+          "Tumis bawang putih cincang dan setengah bagian bawang bombay sampai tercium wangi harum (sekitar 2 menit).",
+          "Masukkan kecap manis, saus tiram, kecap inggris, garam, gula, dan merica. Aduk rata sampai bumbu berbuih.",
+          "Masukkan ayam goreng dan sisa bawang bombay. Aduk cepat hingga ayam terbalur bumbu merata. Masak 3 menit dengan api kecil hingga meresap sempurna. Angkat.",
+          "Memasak Sayur: Di wajan terpisah, panaskan 1 sdm minyak. Tumis 1 siung bawang putih cincang sampai harum. Masukkan wortel dan sedikit air (50 ml), masak 2 menit sampai empuk. Masukkan sawi putih, garam, dan gula. Tumis cepat 3 menit sampai sawi layu tapi tetap renyah garing."
+        ],
+        storageTips: [
+          "Bagi ayam dan sayur menjadi 3 porsi terpisah (Sarapan, Siang, Malam) di wadah tertutup.",
+          "Porsi siang dan malam wajib disimpan di kulkas setelah dingin.",
+          "Panaskan ayam di wajan dengan api kecil (tambahkan 1 sdm air agar tidak gosong) atau microwave 1-2 menit. Sayur cukup dihangatkan sebentar."
+        ],
+        kidTips: [
+          "Potongan ayam sengaja dibuat kecil (seukuran nugget) agar anak mudah memegang dan mengunyah sendiri.",
+          "Wortel dicetak bentuk bunga atau bulat tipis agar lebih menarik perhatian anak.",
+          "Kurangi porsi merica jika buah hati Anda sangat sensitif terhadap rasa hangat lada."
+        ],
+        nutrition: { protein: "Sangat tinggi dari daging ayam broiler segar.", carbs: "Disajikan dari nasi putih terpisah.", fiber: "Cukup tinggi dari kombinasi sawi putih dan wortel kaya Vitamin A." }
+      },
+      {
+        id: 2,
+        name: "Sup Bakso Ayam Telur Puyuh + Tahu Tempe Bacem",
+        type: "Berkuah",
+        cost: 72000,
+        costDetails: [
+          { name: "Bakso Ayam (500g)", price: 25000 },
+          { name: "Telur Puyuh (250g)", price: 12000 },
+          { name: "Tahu & Tempe", price: 10000 },
+          { name: "Sayuran Sup", price: 7000 },
+          { name: "Bumbu & Gas (Alokasi)", price: 18000 }
+        ],
+        time: "40 menit",
+        prepTime: "20 menit",
+        proteins: [
+          { name: "Bakso ayam siap pakai (belah dua)", qty: 500, unit: "gram" },
+          { name: "Telur puyuh (rebus matang, kupas)", qty: 250, unit: "gram" },
+          { name: "Tahu putih besar (potong 6 bagian)", qty: 1, unit: "kotak" },
+          { name: "Tempe (potong 6 bagian)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Kentang (kupas, potong dadu agak besar)", qty: 200, unit: "gram" },
+          { name: "Wortel (kupas, iris bulat 1 cm)", qty: 150, unit: "gram" },
+          { name: "Kembang kol (potong per kuntum)", qty: 100, unit: "gram" },
+          { name: "Daun bawang & seledri (iris kasar)", qty: 2, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (geprek)", qty: 4, unit: "siung" },
+          { name: "Merica bubuk sup", qty: 1, unit: "sdt" },
+          { name: "Garam sup", qty: 2, unit: "sdt" },
+          { name: "Pala bubuk sup", qty: 1, unit: "sdt" },
+          { name: "Kaldu jamur/ayam bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang putih bacem (haluskan)", qty: 4, unit: "siung" },
+          { name: "Bawang merah bacem (haluskan)", qty: 5, unit: "siung" },
+          { name: "Kecap manis bacem", qty: 5, unit: "sdm" },
+          { name: "Asam jawa", qty: 2, unit: "mata" },
+          { name: "Lengkuas (geprek)", qty: 1, unit: "ruas" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Gula merah sisir", qty: 1, unit: "sdm" },
+          { name: "Garam bacem", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Bacem: Tata tahu dan tempe di dasar panci. Masukkan bumbu halus bacem, kecap, asam jawa, lengkuas, daun salam, gula merah, dan garam. Tuang air hingga terendam (sekitar 500 ml). Masak dengan api sedang hingga air menyusut habis dan bumbu meresap (sekitar 25 menit). Angkat. (Bacem sehat ini tidak perlu digoreng kembali untuk menghemat minyak).",
+          "Memasak Sup: Didihkan 1.5 liter air di dalam panci besar.",
+          "Sambil menunggu mendidih, tumis bawang putih geprek dengan 1 sdm minyak sampai kuning keemasan, masukkan tumisan ke dalam air rebusan.",
+          "Masukkan kentang dan wortel terlebih dahulu, masak selama 7 menit hingga setengah empuk.",
+          "Masukkan bakso ayam, telur puyuh kupas, dan kembang kol.",
+          "Tambahkan garam, merica, pala bubuk, dan kaldu bubuk. Aduk rata, masak 5 menit hingga semua matang.",
+          "Sesaat sebelum mematikan kompor, masukkan irisan daun bawang dan seledri. Angkat."
+        ],
+        storageTips: [
+          "Kuah sup bisa membuat sayuran menjadi lembek jika direndam terlalu lama. Pisahkan kuah dengan isian sup jika disimpan untuk makan malam.",
+          "Panaskan kuah sup sampai mendidih bergolak, baru masukkan isian sup sesaat sebelum dihidangkan."
+        ],
+        kidTips: [
+          "Telur puyuh sangat disukai anak-anak karena ukurannya sekali hap. Potong bakso jadi 4 bagian kecil agar tidak ada risiko tersedak."
+        ],
+        nutrition: { protein: "Lengkap dan seimbang (hewani dari bakso dan telur puyuh, nabati dari tahu dan tempe).", carbs: "Dari nasi pendamping dan kentang sup.", fiber: "Sangat melimpah dari wortel dan kembang kol." }
+      },
+      {
+        id: 3,
+        name: "Ikan Kembung Goreng Ketumbar + Sambal Tomat Manis + Lalap Ketimun",
+        type: "Kering",
+        cost: 75000,
+        costDetails: [
+          { name: "Ikan Kembung 1 kg", price: 42000 },
+          { name: "Ketimun & Tomat", price: 8000 },
+          { name: "Bumbu & Minyak (Alokasi)", price: 25000 }
+        ],
+        time: "30 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ikan Kembung segar (siangi, potong dua)", qty: 1, unit: "kg" }
+        ],
+        veggies: [
+          { name: "Ketimun (kupas selang-seling, iris bulat)", qty: 400, unit: "gram" },
+          { name: "Tomat merah besar (untuk sambal manis)", qty: 3, unit: "buah" }
+        ],
+        spices: [
+          { name: "Bawang putih (haluskan)", qty: 4, unit: "siung" },
+          { name: "Ketumbar bubuk", qty: 1, unit: "sdm" },
+          { name: "Kunyit", qty: 1, unit: "ruas" },
+          { name: "Garam bumbu ikan", qty: 1.5, unit: "sdt" },
+          { name: "Bawang merah sambal", qty: 2, unit: "siung" },
+          { name: "Bawang putih sambal", qty: 1, unit: "siung" },
+          { name: "Gula merah", qty: 1, unit: "sdm" },
+          { name: "Garam sambal", qty: 0.5, unit: "sdt" }
+        ],
+        steps: [
+          "Lumuri ikan kembung dengan bumbu halus (bawang putih, ketumbar, kunyit, garam) yang dilarutkan sedikit air. Diamkan 15 menit.",
+          "Panaskan minyak banyak di wajan. Pastikan benar-benar panas agar kulit ikan tidak lengket.",
+          "Goreng ikan sampai kering kuning kecokelatan. Cukup balik sekali agar dagingnya tidak hancur. Angkat.",
+          "Memasak Sambal Tomat Manis: Tumis bawang merah, bawang putih, dan tomat dengan sedikit minyak hingga layu. Ulek kasar, tambahkan gula merah dan garam. Masak kembali sebentar di wajan hingga keluar minyak.",
+          "Tumis Ketimun: Tumis cepat ketimun iris dengan 1 sdt minyak dan sejumput garam selama 1 menit agar tetap renyah."
+        ],
+        storageTips: [
+          "Ikan goreng paling enak dimakan garing. Simpan di wadah kering.",
+          "Saat akan disajikan kembali, panaskan di teflon kering tanpa minyak dengan api kecil, atau gunakan oven/air fryer agar kulitnya kembali renyah garing."
+        ],
+        kidTips: [
+          "Ikan kembung kaya Omega-3. Pisahkan duri tengah dan sampingnya dengan hati-hati sebelum disuapkan ke anak.",
+          "Sambal tomat ini dijamin manis dan segar, tidak pedas sama sekali sehingga aman untuk saus cocolan anak."
+        ],
+        nutrition: { protein: "Sangat tinggi protein hewani kaya Omega-3 untuk otak anak.", carbs: "Dari nasi pendamping.", fiber: "Serat segar dari ketimun dan tomat masak." }
+      },
+      {
+        id: 4,
+        name: "Semur Ayam Kentang Kampung + Tumis Buncis Jagung Manis",
+        type: "Berkuah",
+        cost: 76000,
+        costDetails: [
+          { name: "Ayam 1 kg", price: 40000 },
+          { name: "Kentang, Buncis, Jagung", price: 14000 },
+          { name: "Bumbu & Minyak (Alokasi)", price: 22000 }
+        ],
+        time: "45 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ayam potong (potong 12 bagian)", qty: 1, unit: "kg" }
+        ],
+        veggies: [
+          { name: "Kentang (kupas, belah empat, goreng setengah matang)", qty: 250, unit: "gram" },
+          { name: "Buncis (potong serong tipis)", qty: 200, unit: "gram" },
+          { name: "Jagung manis (pipil bijinya)", qty: 1, unit: "buah" }
+        ],
+        spices: [
+          { name: "Bawang merah (haluskan)", qty: 6, unit: "siung" },
+          { name: "Bawang putih (haluskan)", qty: 4, unit: "siung" },
+          { name: "Kemiri sangrai (haluskan)", qty: 3, unit: "butir" },
+          { name: "Merica bubuk", qty: 0.5, unit: "sdt" },
+          { name: "Pala (haluskan)", qty: 0.25, unit: "biji" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Lengkuas geprek", qty: 1, unit: "ruas" },
+          { name: "Kecap manis", qty: 8, unit: "sdm" },
+          { name: "Garam", qty: 1, unit: "sdt" },
+          { name: "Kaldu bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang putih iris (untuk buncis)", qty: 2, unit: "siung" },
+          { name: "Bawang merah iris (untuk buncis)", qty: 3, unit: "siung" }
+        ],
+        steps: [
+          "Memasak Semur: Tumis bumbu halus bersama daun salam dan lengkuas sampai harum dan berubah warna agak matang.",
+          "Masukkan potongan ayam, aduk sampai kaku dan warnanya berubah pucat.",
+          "Tambahkan kecap manis, aduk sampai ayam terlumuri kecap berkaramel.",
+          "Tuang 800 ml air hangat. Masukkan kentang goreng setengah matang.",
+          "Tambahkan garam, kaldu bubuk, dan merica. Kecilkan api, tutup wajan. Rebus selama 25 menit sampai kuah mengental menyusut dan ayam empuk sempurna.",
+          "Memasak Tumis Buncis: Tumis irisan bawang merah dan bawang putih sampai layu. Masukkan jagung pipil dan buncis. Beri air (30 ml), garam, dan gula. Tumis api besar selama 4 menit sampai matang segar."
+        ],
+        storageTips: [
+          "Semur semakin dipanaskan bumbunya akan semakin meresap lezat sampai ke dalam tulang. Cukup hangatkan di panci kecil sebelum dinikmati."
+        ],
+        kidTips: [
+          "Kuah semur manis gurih sangat disukai anak. Jagung pipil manis memberikan rasa manis segar dan renyah visual yang disukai anak."
+        ],
+        nutrition: { protein: "Kadar protein tinggi pembangun tubuh dari ayam.", carbs: "Energi ganda dari kentang semur dan nasi putih.", fiber: "Serat larut air dari buncis dan jagung manis." }
+      },
+      {
+        id: 5,
+        name: "Perkedel Tahu Kornet + Telur Dadar Gulung (Tamagoyaki Lokal) + Tumis Labu Siam",
+        type: "Kering",
+        cost: 65000,
+        costDetails: [
+          { name: "Tahu Putih (2 kotak)", price: 10000 },
+          { name: "Kornet Sapi (120g)", price: 15000 },
+          { name: "Telur Ayam (5 butir)", price: 15000 },
+          { name: "Labu Siam", price: 5000 },
+          { name: "Bumbu & Minyak (Alokasi)", price: 20000 }
+        ],
+        time: "30 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Tahu putih polos", qty: 400, unit: "gram" },
+          { name: "Kornet sapi kaleng", qty: 120, unit: "gram" },
+          { name: "Telur ayam (2 untuk perkedel, 3 untuk dadar gulung)", qty: 5, unit: "butir" }
+        ],
+        veggies: [
+          { name: "Labu siam muda (iris korek api, remas dengan garam, cuci bersih)", qty: 500, unit: "gram" }
+        ],
+        spices: [
+          { name: "Bawang putih perkedel (goreng, haluskan)", qty: 3, unit: "siung" },
+          { name: "Daun bawang iris", qty: 1, unit: "batang" },
+          { name: "Garam perkedel", qty: 1, unit: "sdt" },
+          { name: "Merica bubuk", qty: 0.5, unit: "sdt" },
+          { name: "Kaldu bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang merah iris labu", qty: 3, unit: "siung" },
+          { name: "Bawang putih iris labu", qty: 2, unit: "siung" }
+        ],
+        steps: [
+          "Memasak Perkedel Tahu: Hancurkan tahu putih di wadah mangkok menggunakan garpu sampai halus. Peras airnya jika terlalu basah. Campur kornet, bawang putih halus, daun bawang, garam, merica, kaldu bubuk, dan 1 butir telur. Aduk rata.",
+          "Bentuk bulat pipih, celupkan ke kocokan telur lepas. Goreng di minyak panas sampai berwarna kuning keemasan (menghasilkan 12-15 biji).",
+          "Memasak Telur Dadar Gulung: Kocok 3 butir telur dengan sedikit garam dan 1 sdm air. Tuang sepertiga adonan di teflon, setelah setengah matang gulung ke satu sisi. Tuang lagi adonan sisa, gulung menyatu dengan gulungan pertama. Lakukan sampai habis, lalu potong-potong tebal 2 cm.",
+          "Memasak Tumis Labu: Tumis bawang merah dan bawang putih sampai harum. Masukkan labu siam. Tumis tanpa air karena labu mengandung air sendiri. Tambahkan garam dan gula, masak 5 menit sampai layu."
+        ],
+        storageTips: [
+          "Perkedel tahu dan telur gulung disimpan di wadah kering beralas tisu. Jangan ditumpuk saat panas agar tidak menjadi lembek."
+        ],
+        kidTips: [
+          "Tekstur perkedel sangat lembut di dalam, mudah dikunyah balita. Tampilan telur gulung yang rapi sangat menarik dipandang anak."
+        ],
+        nutrition: { protein: "Sangat lengkap dari perpaduan tahu (nabati), telur, dan daging kornet (hewani).", carbs: "Karbohidrat bersih dari nasi.", fiber: "Sangat tinggi dari labu siam yang melancarkan pencernaan anak." }
+      },
+      {
+        id: 6,
+        name: "Sup Kimlo Rumahan + Tempe Goreng Tepung",
+        type: "Berkuah",
+        cost: 70000,
+        costDetails: [
+          { name: "Ayam Fillet Dada (500g)", price: 23000 },
+          { name: "Bahan Kimlo (Soun, sedap malam, jamur)", price: 12000 },
+          { name: "Tempe (1 papan)", price: 5000 },
+          { name: "Wortel & Bumbu", price: 10000 },
+          { name: "Minyak & Gas (Alokasi)", price: 20000 }
+        ],
+        time: "40 menit",
+        prepTime: "20 menit",
+        proteins: [
+          { name: "Dada ayam (rebus untuk kaldu, lalu suwir)", qty: 500, unit: "gram" },
+          { name: "Tempe papan (iris tipis menjadi 12 lembar)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Wortel (iris bulat tipis)", qty: 150, unit: "gram" },
+          { name: "Jamur kuping (rendam air panas, potong kasar)", qty: 50, unit: "gram" },
+          { name: "Bunga sedap malam (ikat simpul, rendam air hangat)", qty: 25, unit: "gram" },
+          { name: "Soun (rendam air dingin, tiriskan)", qty: 50, unit: "gram" },
+          { name: "Daun bawang (iris)", qty: 1, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (cincang, tumis)", qty: 5, unit: "siung" },
+          { name: "Merica bubuk", qty: 1, unit: "sdt" },
+          { name: "Garam", qty: 2, unit: "sdt" },
+          { name: "Kaldu bubuk", qty: 1, unit: "sdt" },
+          { name: "Gula pasir", qty: 0.5, unit: "sdt" },
+          { name: "Tepung terigu", qty: 4, unit: "sdm" },
+          { name: "Tepung beras", qty: 1, unit: "sdm" },
+          { name: "Ketumbar bubuk", qty: 0.5, unit: "sdt" },
+          { name: "Bawang putih halus tempe", qty: 1, unit: "siung" }
+        ],
+        steps: [
+          "Rebus dada ayam di 1.5 liter air sampai matang. Angkat ayam, suwir-suwir dagingnya jika sudah agak dingin. Saring kuah rebusan untuk kaldu sup murni.",
+          "Tumis bawang putih cincang sampai kekuningan, lalu masukkan ke dalam kuah kaldu ayam. Didihkan kembali.",
+          "Masukkan wortel, masak selama 5 menit. Masukkan jamur kuping, sedap malam, dan ayam suwir.",
+          "Tambahkan garam, merica, kaldu bubuk, dan sedikit gula. Masak sampai matang.",
+          "Sesaat sebelum diangkat, masukkan soun dan daun bawang. Langsung matikan api agar soun tidak mengembang berlebihan dan menghabiskan air kuah.",
+          "Memasak Tempe Tepung: Campur tepung terigu, tepung beras, bawang putih halus, ketumbar, garam, dan air sampai kental. Celupkan tempe, goreng hingga kuning renyah garing."
+        ],
+        storageTips: [
+          "Penting: Soun menyerap kuah sangat cepat. Jika disimpan untuk beberapa kali makan, pisahkan soun di wadah tersendiri dan masukkan soun sesaat sebelum disajikan."
+        ],
+        kidTips: [
+          "Ayam suwir halus dan soun sangat mudah disendok dan dimakan oleh balita. Kuah sup gurih murni ini menghangatkan badan anak."
+        ],
+        nutrition: { protein: "Hewani murni dari ayam suwir dan nabati dari tempe goreng tepung.", carbs: "Dari soun dan nasi pendamping.", fiber: "Serat unik bertekstur kenyal renyah dari jamur kuping dan bunga sedap malam." }
+      },
+      {
+        id: 7,
+        name: "Tongkol Suwir Kemangi + Tahu Goreng Crispy + Tumis Tauge Kacang Panjang",
+        type: "Kering",
+        cost: 68000,
+        costDetails: [
+          { name: "Pindang Tongkol Cue (1 kg)", price: 35000 },
+          { name: "Tahu Putih", price: 6000 },
+          { name: "Tauge & Kacang Panjang", price: 7000 },
+          { name: "Kemangi & Bumbu (Alokasi)", price: 20000 }
+        ],
+        time: "30 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Pindang Tongkol Cue (kukus, suwir kasar, buang duri)", qty: 1, unit: "kg" },
+          { name: "Tahu putih (potong dadu 2 cm)", qty: 1, unit: "kotak" }
+        ],
+        veggies: [
+          { name: "Tauge segar", qty: 150, unit: "gram" },
+          { name: "Kacang panjang (potong 3 cm)", qty: 100, unit: "gram" },
+          { name: "Daun kemangi (petik daunnya)", qty: 2, unit: "ikat" }
+        ],
+        spices: [
+          { name: "Bawang merah (iris)", qty: 5, unit: "siung" },
+          { name: "Bawang putih (iris)", qty: 3, unit: "siung" },
+          { name: "Tomat merah (potong dadu)", qty: 1, unit: "buah" },
+          { name: "Lengkuas (geprek)", qty: 1, unit: "ruas" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Kecap manis", qty: 1, unit: "sdm" },
+          { name: "Garam", qty: 1, unit: "sdt" },
+          { name: "Gula pasir", qty: 1, unit: "sdt" },
+          { name: "Tepung bumbu serbaguna", qty: 4, unit: "sdm" }
+        ],
+        steps: [
+          "Memasak Tongkol Suwir: Tumis bawang merah, bawang putih, lengkuas, dan daun salam sampai harum layu. Masukkan tomat dadu, masak sampai tomat hancur.",
+          "Masukkan tongkol suwir, aduk rata. Tambahkan kecap manis, garam, dan gula. Masak api sedang sampai bumbu meresap kering kering (sekitar 7 menit). Sesaat sebelum diangkat, masukkan daun kemangi, aduk cepat 1 menit sampai layu, matikan api.",
+          "Memasak Tahu Crispy: Balurkan tahu dadu ke tepung bumbu serbaguna kering sampai rata. Goreng dalam minyak banyak dan panas sampai berkulit garing renyah. Tiriskan.",
+          "Memasak Tumis Tauge: Tumis bawang putih iris, masukkan kacang panjang dan sedikit air, masak 2 menit. Masukkan tauge dan garam, tumis cepat 1 menit di api besar, langsung angkat."
+        ],
+        storageTips: [
+          "Tongkol suwir kering ini sangat tahan lama karena bumbunya dimasak sampai asat (kering). Simpan di wadah rapat, panaskan tanpa minyak saat akan dimakan kembali."
+        ],
+        kidTips: [
+          "Pastikan semua duri ikan tongkol sudah benar-benar bersih saat disuwir. Aroma wangi daun kemangi meningkatkan nafsu makan anak tanpa memberi rasa pedas."
+        ],
+        nutrition: { protein: "Kaya protein ikan laut ekonomis tinggi zat besi serta tahu nabati.", carbs: "Dari nasi putih hangat.", fiber: "Sangat baik dari kombinasi tauge segar dan kacang panjang." }
+      },
+      {
+        id: 8,
+        name: "Rawon Daging Sapi Sederhana + Telur Asin Pendamping",
+        type: "Berkuah",
+        cost: 95000,
+        costDetails: [
+          { name: "Daging Sapi Kisi/Sengkel (500g)", price: 55000 },
+          { name: "Telur Asin (4 butir)", price: 14000 },
+          { name: "Bumbu Rawon (termasuk kluwek)", price: 8000 },
+          { name: "Gas & Minyak (Alokasi)", price: 18000 }
+        ],
+        time: "45 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Daging sapi sengkel/tetelan (potong dadu kecil 1.5 cm agar cepat empuk)", qty: 500, unit: "gram" },
+          { name: "Telur asin matang (belah dua)", qty: 4, unit: "butir" }
+        ],
+        veggies: [
+          { name: "Tauge pendek/tauge rawon (cuci, siram air panas)", qty: 100, unit: "gram" },
+          { name: "Daun bawang (iris kasar)", qty: 1, unit: "batang" }
+        ],
+        spices: [
+          { name: "Kluwek kualitas baik (ambil isinya, rendam air panas)", qty: 4, unit: "buah" },
+          { name: "Bawang merah (haluskan)", qty: 6, unit: "siung" },
+          { name: "Bawang putih (haluskan)", qty: 4, unit: "siung" },
+          { name: "Kemiri (haluskan)", qty: 3, unit: "butir" },
+          { name: "Ketumbar", qty: 1, unit: "sdt" },
+          { name: "Kunyit", qty: 1, unit: "ruas" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Daun jeruk purut (buang tulangnya)", qty: 3, unit: "lembar" },
+          { name: "Sereh (geprek)", qty: 1, unit: "batang" },
+          { name: "Lengkuas (geprek)", qty: 1, unit: "ruas" },
+          { name: "Garam", qty: 2, unit: "sdt" },
+          { name: "Kaldu sapi bubuk", qty: 1, unit: "sdt" },
+          { name: "Gula pasir", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Rebus potongan daging sapi kecil dalam 1.5 liter air. Saring busa keruh yang mengapung di permukaan air kaldu.",
+          "Di wajan terpisah, tumis bumbu halus rawon bersama daun salam, daun jeruk, sereh, dan lengkuas sampai matang dan mengeluarkan minyak hitam pekat (tidak langu).",
+          "Masukkan bumbu tumisan ke dalam rebusan daging sapi.",
+          "Tambahkan garam, kaldu sapi bubuk, dan gula pasir. Kecilkan api kompor, tutup rapat panci. Rebus selama 30-35 menit hingga bumbu meresap hitam pekat dan daging menjadi empuk.",
+          "Masukkan irisan daun bawang sesaat sebelum kompor dimatikan.",
+          "Sajikan rawon hangat bersama taburan tauge pendek dan belahan telur asin."
+        ],
+        storageTips: [
+          "Sama seperti jenis semur, kuah rawon semakin sering dipanaskan bumbunya akan semakin meresap lezat. Pisahkan wadah penyimpanan kuah dan telur asin."
+        ],
+        kidTips: [
+          "Potongan daging dibuat mini (1.5 cm) agar anak tidak lelah atau kesulitan mengunyah daging sapi tanpa perlu proses presto panjang."
+        ],
+        nutrition: { protein: "Zat besi heme tinggi pencegah anemia dari daging sapi, serta protein utuh dari telur asin.", carbs: "Dari nasi putih.", fiber: "Kandungan serat dari tauge pendek pelengkap rawon." }
+      },
+      {
+        id: 9,
+        name: "Fuyunghai Telur Tahu Dada Ayam + Saus Asam Manis Polos",
+        type: "Kering",
+        cost: 65000,
+        costDetails: [
+          { name: "Telur Ayam (6 butir)", price: 18000 },
+          { name: "Dada Ayam Fillet (300g)", price: 15000 },
+          { name: "Tahu Putih & Sayuran Isi", price: 8000 },
+          { name: "Bahan Saus & Minyak (Alokasi)", price: 24000 }
+        ],
+        time: "30 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Telur ayam", qty: 6, unit: "butir" },
+          { name: "Dada ayam fillet (cincang halus)", qty: 300, unit: "gram" },
+          { name: "Tahu putih (hancurkan dengan garpu)", qty: 1, unit: "kotak" }
+        ],
+        veggies: [
+          { name: "Kol/Kubis (iris halus tipis)", qty: 100, unit: "gram" },
+          { name: "Wortel kecil (potong korek api halus)", qty: 1, unit: "buah" },
+          { name: "Kacang polong (untuk saus - opsional)", qty: 50, unit: "gram" }
+        ],
+        spices: [
+          { name: "Tepung terigu", qty: 3, unit: "sdm" },
+          { name: "Tepung sagu/tapioka", qty: 1, unit: "sdm" },
+          { name: "Garam", qty: 1, unit: "sdt" },
+          { name: "Merica bubuk", qty: 0.5, unit: "sdt" },
+          { name: "Kaldu bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang putih saus (cincang)", qty: 1, unit: "siung" },
+          { name: "Saus tomat", qty: 4, unit: "sdm" },
+          { name: "Gula pasir saus", qty: 1, unit: "sdm" },
+          { name: "Garam saus", qty: 0.5, unit: "sdt" },
+          { name: "Cuka makan / air lemon", qty: 0.5, unit: "sdt" },
+          { name: "Tepung maizena (larutkan)", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Campur telur kocok, dada ayam cincang, tahu hancur, kol iris, dan wortel korek api di wadah besar. Masukkan terigu, tapioka, garam, merica, dan kaldu bubuk. Aduk rata.",
+          "Panaskan minyak agak banyak di teflon cekung. Bagi adonan jadi 3 porsi besar.",
+          "Goreng satu porsi di api sedang-kecil sampai bagian dalamnya matang merata. Balik perlahan saat sisi bawahnya mengeras garing. Tiriskan.",
+          "Memasak Saus: Tumis bawang putih cincang dengan 1 sdt minyak sampai harum. Masukkan saus tomat, air, gula, garam, dan cuka. Didihkan, masukkan kacang polong, lalu tuang larutan maizena sampai mengental."
+        ],
+        storageTips: [
+          "Wajib memisahkan fuyunghai goreng dengan sausnya di wadah terpisah agar fuyunghai tidak menjadi benyek. Hangatkan fuyunghai di teflon tanpa minyak."
+        ],
+        kidTips: [
+          "Menu fuyunghai menyamarkan sayuran di dalam telur dan tahu, sangat bagus untuk menyiasati anak yang sulit makan sayur langsung."
+        ],
+        nutrition: { protein: "Sangat padat protein pembangun otot dari telur, dada ayam, dan tahu.", carbs: "Dari nasi pendamping.", fiber: "Serat tersembunyi dari wortel dan kol." }
+      },
+      {
+        id: 10,
+        name: "Garang Asem Ayam Santan (Praktis Tanpa Daun Pisang)",
+        type: "Berkuah",
+        cost: 76000,
+        costDetails: [
+          { name: "Ayam Potong 1 kg", price: 40000 },
+          { name: "Santan Instan (2 bungkus)", price: 6000 },
+          { name: "Tomat Hijau & Belimbing Wuluh", price: 8000 },
+          { name: "Bumbu & Gas (Alokasi)", price: 22000 }
+        ],
+        time: "40 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ayam potong (potong mini 14 bagian, rebus 5 menit, tiriskan)", qty: 1, unit: "kg" }
+        ],
+        veggies: [
+          { name: "Tomat hijau (potong kotak)", qty: 4, unit: "buah" },
+          { name: "Belimbing wuluh (potong bulat 1 cm)", qty: 5, unit: "buah" },
+          { name: "Daun bawang (iris kasar)", qty: 2, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang merah (iris)", qty: 6, unit: "siung" },
+          { name: "Bawang putih (iris)", qty: 4, unit: "siung" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Lengkuas (iris tipis)", qty: 2, unit: "ruas" },
+          { name: "Sereh (geprek)", qty: 2, unit: "batang" },
+          { name: "Garam", qty: 2, unit: "sdt" },
+          { name: "Gula pasir", qty: 1, unit: "sdm" },
+          { name: "Kaldu ayam bubuk", qty: 1, unit: "bungkus" },
+          { name: "Santan instan ( @65ml)", qty: 2, unit: "bungkus" }
+        ],
+        steps: [
+          "Tumis irisan bawang merah, bawang putih, lengkuas, salam, dan sereh dengan 2 sdm minyak di panci sup sampai harum matang.",
+          "Masukkan potongan ayam yang sudah direbus sebentar, aduk rata selama 2 menit.",
+          "Tuang campuran santan instan dan 800 ml air secara perlahan sambil terus diaduk agar santan tidak pecah. Rebus dengan api sedang sampai mendidih.",
+          "Tambahkan garam, gula pasir, dan kaldu ayam. Kecilkan api kompor, rebus 20 menit sampai bumbu meresap dan ayam empuk.",
+          "Terakhir, masukkan potongan tomat hijau, belimbing wuluh, dan daun bawang. Masak 5 menit sampai tomat agak layu dan rasa asamnya keluar. Angkat."
+        ],
+        storageTips: [
+          "Karena mengandung santan dan tomat asam segar, masakan ini berisiko mudah basi. Dinginkan uap panasnya, bagi ke wadah makanan kecil, lalu simpan di bagian dalam kulkas. Hangatkan dengan api kecil sambil diaduk pelan."
+        ],
+        kidTips: [
+          "Rasa kuah gurih berpadu dengan asam segar belimbing wuluh (tanpa cabai) sangat efektif merangsang nafsu makan anak yang sedang tumbuh gigi."
+        ],
+        nutrition: { protein: "Kandungan protein tinggi dari daging ayam broiler utuh.", carbs: "Dari nasi putih hangat.", fiber: "Kandungan Vitamin C dan serat dari tomat hijau serta belimbing wuluh." }
+      },
+      {
+        id: 11,
+        name: "Tempe Mendoan Gurih Besar + Ayam Bakar Teflon Manis Gurih",
+        type: "Kering",
+        cost: 74000,
+        costDetails: [
+          { name: "Ayam 1 kg", price: 40000 },
+          { name: "Tempe Mendoan/Tempe Papan", price: 7000 },
+          { name: "Tepung & Bumbu", price: 10000 },
+          { name: "Gas & Minyak (Alokasi)", price: 17000 }
+        ],
+        time: "40 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ayam potong (potong 12 bagian)", qty: 1, unit: "kg" },
+          { name: "Tempe mendoan / tempe papan (iris tipis lebar)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Selada air / kubis segar (lalap anak - cuci bersih)", qty: 1, unit: "ikat" }
+        ],
+        spices: [
+          { name: "Bawang merah ungkep", qty: 5, unit: "siung" },
+          { name: "Bawang putih ungkep", qty: 4, unit: "siung" },
+          { name: "Kemiri", qty: 3, unit: "butir" },
+          { name: "Kunyit", qty: 1, unit: "ruas" },
+          { name: "Ketumbar bubuk", qty: 1, unit: "sdt" },
+          { name: "Garam bumbu ungkep", qty: 1.5, unit: "sdt" },
+          { name: "Kecap manis ungkep", qty: 5, unit: "sdm" },
+          { name: "Gula merah", qty: 1, unit: "sdm" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Sereh (geprek)", qty: 1, unit: "batang" },
+          { name: "Tepung terigu mendoan", qty: 5, unit: "sdm" },
+          { name: "Tepung beras mendoan", qty: 1, unit: "sdm" },
+          { name: "Daun bawang iris mendoan", qty: 1, unit: "batang" },
+          { name: "Bawang putih halus mendoan", qty: 1, unit: "siung" },
+          { name: "Ketumbar mendoan", qty: 0.5, unit: "sdt" },
+          { name: "Garam mendoan", qty: 0.5, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Ayam Bakar: Masukkan ayam, bumbu halus ungkep, daun salam, sereh, air, kecap manis, garam, dan gula merah ke dalam wajan. Rebus api sedang-kecil sampai air menyusut asat berkilau karamel (sekitar 25 menit). Angkat ayam. Simpan sisa bumbu ungkep kental untuk olesan.",
+          "Panaskan teflon datar, olesi 1 sdm margarin. Panggang ayam sambil diolesi sisa bumbu ungkep. Bakar hingga timbul bercak kecokelatan sedap khas bakaran di kedua belah sisi. Angkat.",
+          "Memasak Tempe Mendoan: Celupkan tempe mendoan tipis ke dalam adonan tepung mendoan basah yang banyak daun bawangnya. Goreng sebentar dalam minyak panas sampai matang tapi masih agak lemas (khas mendoan tradisional). Tiriskan."
+        ],
+        storageTips: [
+          "Ayam bakar sangat aman disimpan. Taruh di wadah kering. Sisa porsi untuk makan malam tinggal dihangatkan kembali di teflon sebentar saja agar aromanya tercium harum kembali."
+        ],
+        kidTips: [
+          "Ayam bakar teflon empuk bercita rasa manis kecap adalah favorit mutlak anak-anak. Mendoan lemas empuk juga sangat gampang digigit anak."
+        ],
+        nutrition: { protein: "Hewani padat dari ayam bakar teflon dan nabati berkualitas tinggi dari tempe mendoan.", carbs: "Dari nasi putih hangat.", fiber: "Serat segar dari lalapan selada/kol." }
+      },
+      {
+        id: 12,
+        name: "Sayur Lodeh Jawa Tengah + Telur Dadar Padang Tebal Kering",
+        type: "Berkuah",
+        cost: 62000,
+        costDetails: [
+          { name: "Telur Ayam (6 butir)", price: 18000 },
+          { name: "Bahan Sayur Lodeh lengkap", price: 12000 },
+          { name: "Tahu Putih", price: 5000 },
+          { name: "Santan & Bumbu", price: 9000 },
+          { name: "Minyak & Gas (Alokasi)", price: 18000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Telur ayam (untuk dadar tebal padang)", qty: 6, unit: "butir" },
+          { name: "Tahu putih (potong dadu, goreng setengah matang)", qty: 1, unit: "kotak" }
+        ],
+        veggies: [
+          { name: "Labu siam besar (iris korek api tebal)", qty: 1, unit: "buah" },
+          { name: "Kacang panjang (potong 4 cm)", qty: 5, unit: "batang" },
+          { name: "Daun melinjo muda (cuci bersih)", qty: 50, unit: "gram" }
+        ],
+        spices: [
+          { name: "Bawang merah lodeh (haluskan)", qty: 5, unit: "siung" },
+          { name: "Bawang putih lodeh (haluskan)", qty: 3, unit: "siung" },
+          { name: "Kemiri (haluskan)", qty: 3, unit: "butir" },
+          { name: "Ketumbar", qty: 1, unit: "sdt" },
+          { name: "Kencur (khas lodeh jawa)", qty: 1, unit: "ruas" },
+          { name: "Garam lodeh", qty: 1.5, unit: "sdt" },
+          { name: "Gula merah", qty: 1, unit: "sdm" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Lengkuas geprek", qty: 1, unit: "ruas" },
+          { name: "Santan instan (65ml)", qty: 1, unit: "bungkus" },
+          { name: "Daun bawang iris (untuk telur)", qty: 2, unit: "batang" },
+          { name: "Bawang merah iris (untuk telur)", qty: 1, unit: "siung" },
+          { name: "Tepung terigu (larutkan agar telur tebal)", qty: 2, unit: "sdm" },
+          { name: "Garam & Kaldu bubuk telur", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Sayur Lodeh: Didihkan 1 liter air bersama bumbu halus lodeh, daun salam, dan lengkuas. Setelah mendidih, masukkan labu siam dan kacang panjang. Masak 5 menit sampai setengah empuk.",
+          "Masukkan tahu goreng dan daun melinjo. Tuang santan instan, kecilkan api kompor. Tambahkan garam dan gula merah. Aduk perlahan agar santan tidak pecah selama 7 menit sampai matang merata.",
+          "Memasak Telur Dadar Tebal: Kocok rata telur, irisan daun bawang, bawang merah, garam, kaldu bubuk, dan larutan terigu. Panaskan teflon kecil dengan minyak agak banyak di api sedang-kecil. Tuang adonan telur dadar.",
+          "Biarkan bagian bawahnya mengeras garing kecokelatan, balik perlahan (bisa dipotong jadi 4 bagian dulu di teflon agar mudah dibalik). Masak sampai matang dalam sempurna. Potong merata."
+        ],
+        storageTips: [
+          "Sayur lodeh santan disimpan terpisah di kulkas setelah dingin. Telur dadar tebal tahan di suhu ruang dalam wadah kering rapat."
+        ],
+        kidTips: [
+          "Tekstur tahu dan labu siam di dalam sayur lodeh sangat empuk dan gampang dimakan anak bersama nasi kuah santan gurih."
+        ],
+        nutrition: { protein: "Tinggi protein hewani dari telur dadar tebal padang dan nabati tahu.", carbs: "Dari nasi putih.", fiber: "Kandungan serat tinggi khas sayur lodeh tradisional." }
+      },
+      {
+        id: 13,
+        name: "Lele Goreng Kremes Bumbu Ketumbar + Tumis Sawi Hijau Bakso",
+        type: "Kering",
+        cost: 68000,
+        costDetails: [
+          { name: "Ikan Lele Segar 1 kg", price: 32000 },
+          { name: "Sawi hijau & Bakso", price: 8000 },
+          { name: "Tepung Kremesan & Bumbu", price: 10000 },
+          { name: "Minyak goreng & Gas (Alokasi)", price: 18000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ikan Lele segar (siangi lendir dengan garam/nipis, kerat tubuh)", qty: 1, unit: "kg" },
+          { name: "Bakso sapi/ayam (iris tipis)", qty: 5, unit: "butir" }
+        ],
+        veggies: [
+          { name: "Sawi hijau/caisim (potong 3 cm)", qty: 2, unit: "ikat besar" }
+        ],
+        spices: [
+          { name: "Bawang putih lele", qty: 4, unit: "siung" },
+          { name: "Kunyit", qty: 1, unit: "ruas" },
+          { name: "Ketumbar bubuk", qty: 1, unit: "sdm" },
+          { name: "Garam marinasi", qty: 1.5, unit: "sdt" },
+          { name: "Tepung tapioka/sagu (kremesan)", qty: 4, unit: "sdm" },
+          { name: "Tepung beras (kremesan)", qty: 1, unit: "sdm" },
+          { name: "Kuning telur (kremesan)", qty: 1, unit: "butir" },
+          { name: "Bawang putih tumis sawi", qty: 2, unit: "siung" },
+          { name: "Garam & Merica tumis", qty: 0.75, unit: "sdt" }
+        ],
+        steps: [
+          "Menggoreng Lele: Panaskan minyak banyak di wajan sampai benar-benar panas membara. Goreng lele yang telah dibalur bumbu halus marinasi sampai garing kering renyah garing. Angkat.",
+          "Membuat Kremesan: Campur 3 sdm sisa air bumbu marinasi, tepung tapioka, tepung beras, kuning telur, dan 150 ml air (adonan harus encer sekali). Kucurkan adonan tinggi-tinggi di minyak panas melingkar. Setelah mengumpul kecokelatan, lipat, angkat. Taburi di atas lele.",
+          "Memasak Tumis Sawi: Tumis bawang putih iris. Masukkan irisan bakso, tumis 1 menit. Masukkan sawi hijau, garam, dan merica. Masak di api besar 2-3 menit sampai layu renyah. Angkat."
+        ],
+        storageTips: [
+          "Lele goreng dan kremesan wajib disimpan di wadah kering beralas tisu serap minyak. Tutup rapat agar kremesan tidak mlempem."
+        ],
+        kidTips: [
+          "Tekstur kremesan renyah gurih sangat disukai anak. Daging lele tidak memiliki duri menyusup di dalam daging (hanya di tulang tengah) sehingga sangat aman dan mudah disuapkan ke balita."
+        ],
+        nutrition: { protein: "Kaya protein, kalsium, dan fosfor dari ikan lele, ditambah bakso.", carbs: "Karbohidrat nasi putih.", fiber: "Serat zat besi tinggi dari sawi hijau segar." }
+      },
+      {
+        id: 14,
+        name: "Sup Bakso Ikan Kakap/Sapi + Tumis Tahu Tempe Kecap Basah",
+        type: "Berkuah",
+        cost: 72000,
+        costDetails: [
+          { name: "Bakso Ikan/Sapi (500g)", price: 28000 },
+          { name: "Tahu & Tempe Papan", price: 10000 },
+          { name: "Sayur Sup Bening", price: 8000 },
+          { name: "Bumbu & Gas (Alokasi)", price: 26000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Bakso ikan/sapi (belah dua)", qty: 500, unit: "gram" },
+          { name: "Tahu putih besar (potong kotak kecil)", qty: 1, unit: "kotak" },
+          { name: "Tempe papan (potong kotak seukuran tahu)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Sawi putih (iris)", qty: 200, unit: "gram" },
+          { name: "Wortel (iris bulat)", qty: 100, unit: "gram" },
+          { name: "Daun bawang seledri (iris)", qty: 1, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (geprek, tumis)", qty: 4, unit: "siung" },
+          { name: "Merica bubuk", qty: 1, unit: "sdt" },
+          { name: "Garam sup", qty: 2, unit: "sdt" },
+          { name: "Kaldu bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang putih iris (kecap)", qty: 3, unit: "siung" },
+          { name: "Bawang merah iris (kecap)", qty: 4, unit: "siung" },
+          { name: "Kecap manis", qty: 5, unit: "sdm" },
+          { name: "Saus tiram", qty: 1, unit: "sdm" },
+          { name: "Garam kecap", qty: 0.5, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Tahu Tempe Kecap: Goreng tahu dan tempe sampai setengah matang (berkulit lembut). Tumis irisan bawang putih dan bawang merah sampai harum. Masukkan tahu tempe, aduk rata.",
+          "Tambahkan kecap manis, saus tiram, garam, dan air (100 ml). Masak sampai air menyusut menyisakan kuah kental nyemek basah. Angkat.",
+          "Memasak Sup Bening: Didihkan 1.2 liter air di panci. Masukkan tumisan bawang putih geprek.",
+          "Masukkan wortel, masak 4 menit sampai mulai empuk.",
+          "Masukkan bakso ikan dan sawi putih. Tambahkan garam, merica, dan kaldu bubuk. Rebus sampai bakso mengapung matang. Taburi daun bawang seledri, angkat."
+        ],
+        storageTips: [
+          "Sup bakso bening sangat praktis dihangatkan. Cukup dididihkan ulang di kompor dalam 3 menit saat akan dinikmati."
+        ],
+        kidTips: [
+          "Bakso ikan kenyal lembut sangat digemari anak. Tahu tempe kecap basah yang manis manis empuk juga mempermudah balita menyuap nasi."
+        ],
+        nutrition: { protein: "Hewani bersih rendah lemak dari bakso ikan, ditambah protein nabati tempe tahu.", carbs: "Dari nasi putih.", fiber: "Serat halus dari sawi putih dan wortel lokal." }
+      },
+      {
+        id: 15,
+        name: "Ayam Fillet Crispy Saus Madu + Tumis Kacang Panjang Teri Medan",
+        type: "Kering",
+        cost: 79000,
+        costDetails: [
+          { name: "Dada Ayam Fillet 1 kg", price: 45000 },
+          { name: "Kacang Panjang & Teri (50g)", price: 10000 },
+          { name: "Madu sachet & Tepung", price: 9000 },
+          { name: "Minyak & Gas (Alokasi)", price: 15000 }
+        ],
+        time: "40 menit",
+        prepTime: "20 menit",
+        proteins: [
+          { name: "Dada ayam fillet (potong dadu sekali gigit)", qty: 1, unit: "kg" },
+          { name: "Teri medan (cuci bersih, goreng kering)", qty: 50, unit: "gram" }
+        ],
+        veggies: [
+          { name: "Kacang panjang (potong 3 cm)", qty: 300, unit: "gram" }
+        ],
+        spices: [
+          { name: "Telur ayam (pengikat)", qty: 1, unit: "butir" },
+          { name: "Tepung terigu", qty: 6, unit: "sdm" },
+          { name: "Tepung maizena", qty: 2, unit: "sdm" },
+          { name: "Garam bumbu ayam", qty: 1, unit: "sdt" },
+          { name: "Merica bubuk", qty: 0.5, unit: "sdt" },
+          { name: "Bawang putih cincang saus", qty: 2, unit: "siung" },
+          { name: "Madu asli (sachet)", qty: 3, unit: "sdm" },
+          { name: "Kecap manis saus", qty: 2, unit: "sdm" },
+          { name: "Saus tiram saus", qty: 1, unit: "sdm" },
+          { name: "Margarin menumis", qty: 1, unit: "sdm" },
+          { name: "Bawang merah sayur", qty: 2, unit: "siung" },
+          { name: "Bawang putih sayur", qty: 1, unit: "siung" }
+        ],
+        steps: [
+          "Memasak Ayam Crispy: Lumuri potongan dada ayam dengan garam, merica, dan telur kocok. Gulingkan satu per satu ke dalam campuran tepung terigu dan maizena sambil dicubit-cubit agar keriting garing saat digoreng.",
+          "Goreng dalam minyak banyak panas sampai kuning keemasan renyah garing. Angkat, tiriskan ayam.",
+          "Di wajan bersih terpisah, panaskan margarin. Tumis bawang putih cincang sampai kekuningan. Masukkan madu, kecap manis, saus tiram, dan air (50 ml). Aduk rata sampai mendidih meletup-letup kental berkaramel.",
+          "Masukkan ayam goreng crispy tepung, aduk cepat 1 menit sampai seluruh saus madu mengkilap menyelimuti kulit ayam. Angkat.",
+          "Memasak Tumis Kacang Panjang: Tumis bawang merah dan bawang putih sampai layu. Masukkan kacang panjang, beri sedikit air dan garam. Masak 4 menit. Taburkan teri medan garing di atasnya setelah diangkat."
+        ],
+        storageTips: [
+          "Simpan saus dan ayam crispy di wadah rapat terpisah jika disimpan untuk makan malam agar kulit tepungnya tetap renyah tidak benyek."
+        ],
+        kidTips: [
+          "Daging fillet tanpa duri dilapisi madu manis mengkilat dijamin jadi rebutan anak di rumah. Rasanya mewah mirip ayam saus Korea restoran."
+        ],
+        nutrition: { protein: "Sangat tinggi protein hewani (dada ayam murni) ditambah kalsium tulang tinggi dari teri medan.", carbs: "Dari nasi putih hangat.", fiber: "Serat padat sehat dari kacang panjang sayur." }
+      },
+      {
+        id: 16,
+        name: "Sup Ayam Klaten Bening Segar + Perkedel Kentang",
+        type: "Berkuah",
+        cost: 78000,
+        costDetails: [
+          { name: "Ayam Rebus Gurih 1 kg", price: 40000 },
+          { name: "Kentang (500g)", price: 9000 },
+          { name: "Telur (1 butir pelapis)", price: 3000 },
+          { name: "Bumbu & Seledri", price: 8000 },
+          { name: "Minyak & Gas (Alokasi)", price: 18000 }
+        ],
+        time: "45 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ayam potong segar (potong kecil 12 bagian)", qty: 1, unit: "kg" },
+          { name: "Telur ayam (pelapis perkedel)", qty: 1, unit: "butir" }
+        ],
+        veggies: [
+          { name: "Kentang (kupas, potong bulat, goreng)", qty: 500, unit: "gram" },
+          { name: "Seledri & daun bawang (potong kasar)", qty: 2, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (haluskan)", qty: 6, unit: "siung" },
+          { name: "Merica butiran/bubuk", qty: 1, unit: "sdt" },
+          { name: "Jahe (geprek)", qty: 1, unit: "ruas" },
+          { name: "Daun jeruk purut", qty: 2, unit: "lembar" },
+          { name: "Daun salam", qty: 1, unit: "lembar" },
+          { name: "Garam sup", qty: 2, unit: "sdt" },
+          { name: "Kaldu ayam bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang putih perkedel (goreng)", qty: 2, unit: "siung" },
+          { name: "Bawang merah perkedel (goreng)", qty: 3, unit: "siung" },
+          { name: "Garam & Merica perkedel", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Sup Klaten: Didihkan 1.5 liter air di panci. Masukkan potongan ayam, jahe, daun jeruk, dan daun salam.",
+          "Haluskan bawang putih dan merica sup. Masukkan langsung bumbu halus tersebut ke air rebusan mendidih tanpa ditumis (rahasia kuah sup Klaten bening segar bebas minyak enek).",
+          "Tambahkan garam dan kaldu ayam. Kecilkan api kompor, rebus 35 menit sampai sari kaldu keluar gurih alami dan ayam empuk lepas dari tulang. Taburi seledri daun bawang melimpah.",
+          "Memasak Perkedel: Haluskan kentang goreng selagi hangat bersama bawang putih goreng, bawang merah goreng, garam, dan merica. Bentuk bulat pipih, celupkan ke kocokan telur, goreng di minyak panas sampai kecokelatan. Angkat."
+        ],
+        storageTips: [
+          "Sup ayam Klaten sangat awet karena kuahnya bersih tanpa santan/minyak tumis berlebih. Hangatkan kembali sampai mendidih bergolak sebelum dimakan."
+        ],
+        kidTips: [
+          "Sari kaldu ayam asli kaya jahe bawang sangat bagus melipatgandakan imun tubuh anak dan menghangatkan tenggorokan."
+        ],
+        nutrition: { protein: "Sangat tinggi protein hewani murni dari kaldu ayam rebus dan telur dadar pelapis.", carbs: "Karbohidrat tinggi dari nasi dan kentang perkedel.", fiber: "Minimalis dari daun seledri tabur sup." }
+      },
+      {
+        id: 17,
+        name: "Orak-Arik Telur Tahu Sayuran Pasrah + Ikan Lele Bakar Teflon Kecap Bawang",
+        type: "Kering",
+        cost: 65000,
+        costDetails: [
+          { name: "Ikan Lele 1 kg", price: 32000 },
+          { name: "Telur (3 butir)", price: 9000 },
+          { name: "Tahu & Sayur Pasrah", price: 7000 },
+          { name: "Bumbu & Minyak (Alokasi)", price: 17000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ikan Lele segar (siangi, kukus 7 menit agar tidak hancur)", qty: 1, unit: "kg" },
+          { name: "Telur ayam (orak-arik)", qty: 3, unit: "butir" },
+          { name: "Tahu putih (hancurkan kasar)", qty: 2, unit: "kotak kecil" }
+        ],
+        veggies: [
+          { name: "Wortel (serut kasar/pasrah dengan parutan keju)", qty: 150, unit: "gram" },
+          { name: "Kol/Kubis (iris halus tipis)", qty: 100, unit: "gram" }
+        ],
+        spices: [
+          { name: "Bawang putih oles lele", qty: 4, unit: "siung" },
+          { name: "Kecap manis oles lele", qty: 5, unit: "sdm" },
+          { name: "Saus tiram oles lele", qty: 1, unit: "sdm" },
+          { name: "Ketumbar oles lele", qty: 1, unit: "sdt" },
+          { name: "Bawang merah orak-arik", qty: 3, unit: "siung" },
+          { name: "Bawang putih orak-arik", qty: 2, unit: "siung" },
+          { name: "Garam & Kaldu bubuk orak-arik", qty: 1.5, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Lele Bakar: Campur bumbu olesan lele (bawang putih halus, kecap manis, saus tiram, ketumbar, 1 sdm minyak). Balur ke tubuh lele kukus setengah matang.",
+          "Panggang di teflon anti-lengket dengan api kecil. Cukup balik sekali hati-hati menggunakan dua sutil agar daging lele tidak pecah hancur. Olesi bumbu kembali, bakar sampai harum karamel kecokelatan. Angkat.",
+          "Memasak Orak-Arik: Panaskan 2 sdm minyak. Tumis bawang merah dan bawang putih iris sampai layu. Masukkan telur, aduk cepat hancur berserat (orak-arik).",
+          "Masukkan tahu hancur, tumis sampai tahu kering. Masukkan wortel pasrah dan kol iris. Tambahkan garam, kaldu bubuk, dan merica. Masak 4 menit di api sedang tanpa air sampai matang layu kering. Angkat."
+        ],
+        storageTips: [
+          "Orak-arik kering tanpa air ini sangat awet disimpan seharian di wadah kedap rapat, tidak gampang basi."
+        ],
+        kidTips: [
+          "Sayur pasrah (wortel diparut halus) menyatu sempurna bersama telur orak-arik sehingga mempermudah balita memakannya tanpa sadar."
+        ],
+        nutrition: { protein: "Kombinasi protein tiga kali lipat (ikan lele, telur ayam, tahu putih).", carbs: "Karbohidrat nasi pendamping.", fiber: "Serat lembut ramah pencernaan anak dari wortel pasrah." }
+      },
+      {
+        id: 18,
+        name: "Sup Oyong Soun Bakso Ayam + Tempe Bacem Gurih",
+        type: "Berkuah",
+        cost: 63000,
+        costDetails: [
+          { name: "Bakso Ayam (500g)", price: 25000 },
+          { name: "Tempe Papan besar", price: 6000 },
+          { name: "Oyong & Soun", price: 8000 },
+          { name: "Bumbu & Gas (Alokasi)", price: 24000 }
+        ],
+        time: "30 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Bakso ayam rumahan (belah silang)", qty: 500, unit: "gram" },
+          { name: "Tempe papan (potong tebal 8 bagian)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Oyong/Gambas (kupas bagian tajam, potong bulat)", qty: 3, unit: "buah" },
+          { name: "Soun jernih (rendam air, gunting pendek)", qty: 50, unit: "gram" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (iris)", qty: 4, unit: "siung" },
+          { name: "Bawang merah sup (iris)", qty: 3, unit: "siung" },
+          { name: "Garam sup", qty: 1, unit: "sdt" },
+          { name: "Merica bubuk", qty: 0.5, unit: "sdt" },
+          { name: "Kaldu jamur", qty: 0.5, unit: "sdt" },
+          { name: "Bawang putih bacem (haluskan)", qty: 3, unit: "siung" },
+          { name: "Kecap manis bacem", qty: 4, unit: "sdm" },
+          { name: "Gula merah bacem", qty: 1, unit: "keping" },
+          { name: "Ketumbar bubuk", qty: 1, unit: "sdt" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Garam bacem", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Tempe Bacem: Rebus tempe bersama bumbu halus bacem, kecap, gula merah, ketumbar, salam, garam, dan air sampai air menyusut asat kering. Tempe bisa langsung dimakan sehat atau dipanggang teflon sejenak.",
+          "Memasak Sup Oyong: Panaskan 1 sdm minyak. Tumis irisan bawang putih dan bawang merah sup sampai wangi kekuningan.",
+          "Tuang 1.2 liter air, biarkan sampai mendidih bergolak.",
+          "Masukkan bakso ayam dan oyong secara bersamaan. Rebus sekitar 5 menit sampai oyong melunak transparan lembut.",
+          "Tambahkan garam, merica, dan kaldu jamur. Matikan api kompor, lalu masukkan soun lunak ke air sup hangat."
+        ],
+        storageTips: [
+          "Aturan soun: Pisahkan soun di wadah kering jika sup dimakan berkala (siang-malam) agar kuah tidak habis tersedot soun."
+        ],
+        kidTips: [
+          "Oyong bertekstur sangat lembut dan licin mengalir ketika dikunyah, dibantu soun mulur disukai balita saat sariawan atau tumbuh gigi."
+        ],
+        nutrition: { protein: "Terpenuhi baik dari protein bakso ayam dan tempe bacem kedelai murni.", carbs: "Karbohidrat nasi dan soun.", fiber: "Tinggi serat halus penyegar pencernaan dari oyong." }
+      },
+      {
+        id: 19,
+        name: "Telur Dadar Gurih Gulung Sosis + Tumis Tahu Tauge Saus Tiram",
+        type: "Kering",
+        cost: 58000,
+        costDetails: [
+          { name: "Telur Ayam (6 butir)", price: 18000 },
+          { name: "Sosis Sapi/Ayam (5 batang)", price: 10000 },
+          { name: "Tahu & Tauge segar", price: 7000 },
+          { name: "Bumbu, Minyak, Gas (Alokasi)", price: 23000 }
+        ],
+        time: "25 menit",
+        prepTime: "10 menit",
+        proteins: [
+          { name: "Telur ayam (kocok lepas)", qty: 6, unit: "butir" },
+          { name: "Sosis ayam/sapi (rebus, belah dua memanjang)", qty: 5, unit: "batang" },
+          { name: "Tahu putih besar (potong dadu panjang, goreng berkulit)", qty: 1, unit: "kotak" }
+        ],
+        veggies: [
+          { name: "Tauge kedelai/biasa segar", qty: 200, unit: "gram" },
+          { name: "Daun bawang (potong serong)", qty: 1, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih tumis (cincang)", qty: 2, unit: "siung" },
+          { name: "Bawang merah tumis (iris)", qty: 3, unit: "siung" },
+          { name: "Saus tiram", qty: 2, unit: "sdm" },
+          { name: "Kecap manis", qty: 1, unit: "sdm" },
+          { name: "Garam & Gula pasir", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Telur Gulung Sosis: Panaskan teflon anti-lengket dengan sedikit minyak di api sedang-kecil. Tuang sebagian kocokan telur merata tipis melingkar.",
+          "Tata sosis rebus di ujung telur, lalu gulung perlahan membungkus sosis seiring telur matang. Angkat, potong-potong melintang setebal 3 cm. Ulangi untuk sisa adonan.",
+          "Memasak Tumis Tahu Tauge: Tumis bawang putih cincang dan bawang merah iris sampai wangi harum. Masukkan tahu dadu berkulit, aduk rata.",
+          "Tambahkan saus tiram, kecap manis, garam, gula, dan sedikit air (50 ml). Masak sampai bumbu meresap ke tahu (2 menit).",
+          "Masukkan tauge dan daun bawang, tumis kilat api besar 1-2 menit saja sampai tauge layu tapi masih renyah garing. Angkat."
+        ],
+        storageTips: [
+          "Telur sosis awet disimpan di wadah kering tertutup suhu ruang. Taruh tumis tauge di wadah terpisah agar kuah saus tidak membasahi telur sosis."
+        ],
+        kidTips: [
+          "Sosis berbalut telur dadar selalu digemari anak. Potongan tahu dan tauge manis juga berukuran pas sekali suap."
+        ],
+        nutrition: { protein: "Hewani padat dari telur sosis dan nabati dari tahu putih.", carbs: "Dari nasi putih.", fiber: "Kandungan serat tinggi kaya enzim dari tauge segar." }
+      },
+      {
+        id: 20,
+        name: "Sup Asam-Asam Ayam Bening + Perkedel Tempe",
+        type: "Berkuah",
+        cost: 72000,
+        costDetails: [
+          { name: "Ayam Potong 1 kg", price: 40000 },
+          { name: "Tempe (1/2 papan)", price: 3000 },
+          { name: "Bahan Asam", price: 9000 },
+          { name: "Bumbu & Gas (Alokasi)", price: 20000 }
+        ],
+        time: "40 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ayam potong (potong sup mini 14 bagian)", qty: 1, unit: "kg" },
+          { name: "Tempe papan (rebus matang, haluskan)", qty: 0.5, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Buncis (potong 2 cm)", qty: 100, unit: "gram" },
+          { name: "Belimbing wuluh (belah dua memanjang)", qty: 4, unit: "buah" },
+          { name: "Tomat merah segar (potong belah 6)", qty: 1, unit: "buah" }
+        ],
+        spices: [
+          { name: "Bawang merah sup", qty: 5, unit: "siung" },
+          { name: "Bawang putih sup", qty: 3, unit: "siung" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Lengkuas geprek", qty: 1, unit: "ruas" },
+          { name: "Kecap manis", qty: 5, unit: "sdm" },
+          { name: "Garam sup & Gula", qty: 2.5, unit: "sdt" },
+          { name: "Kaldu bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang putih halus perkedel", qty: 1, unit: "siung" },
+          { name: "Telur ayam (setengah adonan, setengah pelapis)", qty: 1, unit: "butir" },
+          { name: "Ketumbar & Garam perkedel", qty: 1, unit: "sdt" },
+          { name: "Daun bawang iris", qty: 1, unit: "batang" }
+        ],
+        steps: [
+          "Memasak Sup Asam-Asam: Didihkan 1.2 liter air di panci. Rebus ayam potong hingga busa lemak kotoran keluar, saring buang busanya agar kuah bening jernih.",
+          "Tumis irisan bawang merah dan bawang putih bersama daun salam dan lengkuas sampai wangi layu, masukkan ke dalam air rebusan ayam.",
+          "Tambahkan kecap manis, garam, gula, dan kaldu bubuk. Kecilkan api kompor, rebus 20 menit sampai ayam empuk.",
+          "Masukkan buncis, belimbing wuluh, dan tomat merah. Rebus lagi 5 menit sampai buncis matang kuah asam manis segar. Angkat.",
+          "Memasak Perkedel Tempe: Campur tempe hancur dengan bawang putih halus, ketumbar, garam, daun bawang, dan setengah kocokan telur. Bentuk bulat pipih.",
+          "Celupkan ke sisa kocokan telur, goreng di minyak panas sampai kuning keemasan. Tiriskan."
+        ],
+        storageTips: [
+          "Kuah asam-asam ayam tanpa santan sangat aman dipanaskan berulang kali untuk makan siang dan malam keluarga."
+        ],
+        kidTips: [
+          "Rasa kuah manis asam segar belimbing wuluh alami sangat pas bagi lidah anak kecil, mengatasi bosan masakan gurih monoton."
+        ],
+        nutrition: { protein: "Hewani melimpah dari 1 kg ayam utuh dan nabati dari perkedel tempe kukus.", carbs: "Dari nasi putih.", fiber: "Mengandung Vitamin C dari belimbing wuluh/tomat dan serat hijau buncis." }
+      },
+      {
+        id: 21,
+        name: "Ikan Kembung Bakar Teflon Bumbu Padang (Tidak Pedas) + Cah Sawi Putih Wortel",
+        type: "Kering",
+        cost: 72000,
+        costDetails: [
+          { name: "Ikan Kembung 1 kg", price: 42000 },
+          { name: "Sawi Putih & Wortel", price: 8000 },
+          { name: "Bumbu, Santan, Minyak", price: 10000 },
+          { name: "Gas harian (Alokasi)", price: 12000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ikan Kembung segar (bersihkan, kerat kedua sisi)", qty: 1, unit: "kg" }
+        ],
+        veggies: [
+          { name: "Sawi putih (potong melintang tebal)", qty: 300, unit: "gram" },
+          { name: "Wortel (iris serong tipis)", qty: 1, unit: "buah" }
+        ],
+        spices: [
+          { name: "Bawang merah kembung", qty: 5, unit: "siung" },
+          { name: "Bawang putih kembung", qty: 3, unit: "siung" },
+          { name: "Kemiri sangrai", qty: 3, unit: "butir" },
+          { name: "Kunyit bakar", qty: 1, unit: "ruas" },
+          { name: "Jahe", qty: 1, unit: "ruas" },
+          { name: "Ketumbar & Garam", qty: 2, unit: "sdt" },
+          { name: "Santan kental instan", qty: 3, unit: "sdm" },
+          { name: "Bawang putih cincang sawi", qty: 2, unit: "siung" },
+          { name: "Garam & Merica sawi", qty: 0.75, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Kembung Bakar: Campur bumbu halus (bawang merah, putih, kemiri, kunyit, jahe, ketumbar, garam, gula) dengan 3 sdm santan kental instan. Balurkan ke sekujur tubuh kembung, diamkan 15 menit.",
+          "Panaskan teflon anti-lengket, beri alas daun pisang (opsional agar wangi tradisional) atau olesi sedikit margarin.",
+          "Panggang ikan kembung dengan api kecil. Olesi berulang kali dengan sisa bumbu santan bumbu Padang di atas tubuh ikan.",
+          "Balik sekali dengan hati-hati setelah sisi bawahnya matang garing kecokelatan. Panggang sampai matang merata. Angkat.",
+          "Memasak Cah Sawi: Tumis bawang putih cincang. Masukkan wortel dan air (30 ml), masak 2 menit. Masukkan sawi putih, garam, dan merica. Tumis cepat api besar 2 menit sampai layu segar. Angkat."
+        ],
+        storageTips: [
+          "Simpan ikan bakar bumbu Padang kaya kunyit ini di wadah kering bersih. Hangatkan di teflon kering ditutup rapat di atas api terkecil kompor."
+        ],
+        kidTips: [
+          "Bumbu kuning santan yang gurih gurih sedap ini dijamin bebas pedas, sangat menggugah nafsu makan balita pintar."
+        ],
+        nutrition: { protein: "Kaya kandungan Omega-3 alami luar biasa penting untuk kecerdasan otak anak.", carbs: "Dari nasi hangat.", fiber: "Cukup sehat dari sawi putih dan wortel kaya Vitamin A." }
+      },
+      {
+        id: 22,
+        name: "Sup Bakso Sapi Tahu Bening Komplit + Tempe Goreng Tepung Ketumbar",
+        type: "Berkuah",
+        cost: 70000,
+        costDetails: [
+          { name: "Bakso Sapi murni (500g)", price: 30000 },
+          { name: "Tahu Putih Sutra (2 kotak)", price: 6000 },
+          { name: "Tempe Papan", price: 5000 },
+          { name: "Sayur Bening Sup", price: 10000 },
+          { name: "Bumbu & Gas (Alokasi)", price: 19000 }
+        ],
+        time: "30 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Bakso sapi murni (belah dua/utuh)", qty: 500, unit: "gram" },
+          { name: "Tahu putih biasa (potong dadu 2.5 cm)", qty: 2, unit: "kotak" },
+          { name: "Tempe (iris tipis melebar)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Wortel (iris bulat tebal 1 cm)", qty: 150, unit: "gram" },
+          { name: "Brokoli hijau (potong per kuntum, cuci air garam)", qty: 150, unit: "gram" },
+          { name: "Daun bawang seledri (iris halus)", qty: 1, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (geprek, tumis)", qty: 4, unit: "siung" },
+          { name: "Merica bubuk", qty: 1, unit: "sdt" },
+          { name: "Garam sup", qty: 2, unit: "sdt" },
+          { name: "Kaldu sapi bubuk", qty: 1, unit: "sdt" },
+          { name: "Tepung terigu tempe", qty: 4, unit: "sdm" },
+          { name: "Tepung tapioka tempe", qty: 1, unit: "sdm" },
+          { name: "Ketumbar bubuk tempe", qty: 1, unit: "sdt" },
+          { name: "Bawang putih halus tempe", qty: 1, unit: "siung" },
+          { name: "Garam tempe", qty: 0.5, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Sup Bakso Tahu: Didihkan 1.2 liter air di panci, masukkan bawang putih goreng geprek beserta wortel. Masak wortel selama 4 menit.",
+          "Masukkan bakso sapi dan potongan tahu putih dadu ke kuah mendidih.",
+          "Tambahkan garam, merica bubuk, dan kaldu sapi bubuk. Aduk rata perlahan agar tahu tidak hancur pecah.",
+          "Masukkan kuntum brokoli hijau, masak lanjutan selama 3 menit di api sedang agar brokoli tetap berwarna hijau renyah segar. Matikan api, taburi daun bawang seledri.",
+          "Memasak Tempe Tepung: Campur terigu, tapioka, ketumbar bubuk, bawang putih halus, garam, dan air sampai menjadi adonan kental. Celupkan tempe, goreng garing renyah dalam minyak panas sampai kuning keemasan. Tiriskan."
+        ],
+        storageTips: [
+          "Sup bakso sapi tahu sangat gampang dipanaskan. Agar brokoli tidak layu kekuningan saat malam, masukkan kuntum brokoli baru sesaat setelah kuah mendidih kembali."
+        ],
+        kidTips: [
+          "Bakso kenyal dan tahu putih selembut sutra dipadu kuah bening hangat adalah hidangan paling aman netral bagi balita."
+        ],
+        nutrition: { protein: "Hewani dari bakso sapi, nabati lengkap dari tahu sutra dan tempe ketumbar garing.", carbs: "Karbohidrat nasi putih.", fiber: "Kaya antioksidan dan kalsium dari brokoli hijau segar dan wortel." }
+      },
+      {
+        id: 23,
+        name: "Ayam Suwir Saus Tiram Mentega + Tahu Crispy Saus Tomat Manis",
+        type: "Kering",
+        cost: 72000,
+        costDetails: [
+          { name: "Dada Ayam 1 kg", price: 40000 },
+          { name: "Tahu Putih Kotak (2 kotak)", price: 6000 },
+          { name: "Tepung Bumbu Crispy", price: 10000 },
+          { name: "Minyak & Gas (Alokasi)", price: 16000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Dada ayam tanpa tulang (rebus 15 menit dengan garam, suwir)", qty: 1, unit: "kg" },
+          { name: "Tahu putih (potong dadu kecil 2 cm)", qty: 2, unit: "kotak besar" }
+        ],
+        veggies: [
+          { name: "Bawang bombay (iris memanjang)", qty: 1, unit: "buah" },
+          { name: "Daun bawang (iris serong)", qty: 1, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih ayam (cincang)", qty: 4, unit: "siung" },
+          { name: "Margarin/Mentega menumis", qty: 3, unit: "sdm" },
+          { name: "Saus tiram", qty: 3, unit: "sdm" },
+          { name: "Kecap manis", qty: 2, unit: "sdm" },
+          { name: "Garam & Merica ayam", qty: 1, unit: "sdt" },
+          { name: "Tepung bumbu serbaguna", qty: 4, unit: "sdm" },
+          { name: "Saus tomat manis cocolan", qty: 3, unit: "sdm" }
+        ],
+        steps: [
+          "Memasak Ayam Suwir Mentega: Panaskan margarin di wajan sampai mencair. Tumis bawang putih cincang dan setengah bagian bawang bombay sampai harum layu (2 menit).",
+          "Masukkan dada ayam suwir matang, aduk rata.",
+          "Tambahkan saus tiram, kecap manis, merica, garam, dan sedikit air (50 ml). Masak di api kecil 7 menit sampai meresap kering mengkilap berbalut mentega.",
+          "Masukkan sisa bawang bombay dan daun bawang, aduk cepat 1 menit lalu angkat.",
+          "Memasak Tahu Crispy: Balur tahu putih dadu kecil langsung ke tepung bumbu serbaguna kering sampai tertutup rata.",
+          "Goreng dalam minyak panas melimpah sampai kulit luar tahu garing kecokelatan. Tiriskan, sajikan bersama cocolan saus tomat manis."
+        ],
+        storageTips: [
+          "Ayam suwir mentega kering bebas santan/kuah basah ini sangat awet disimpan suhu ruang, tidak mudah basi."
+        ],
+        kidTips: [
+          "Ayam suwir mempermudah balita menyantap daging tanpa repot memisahkan tulang ayam keras."
+        ],
+        nutrition: { protein: "Sangat tinggi protein dada ayam murni pembangun sel tubuh, ditambah tahu.", carbs: "Dari nasi hangat.", fiber: "Serat ringan dari bawang bombay layu." }
+      },
+      {
+        id: 24,
+        name: "Sup Kimlo Bakso Sapi Telur Puyuh + Tempe Bacem Legit Tradisional",
+        type: "Berkuah",
+        cost: 78000,
+        costDetails: [
+          { name: "Bakso Sapi (300g)", price: 18000 },
+          { name: "Telur Puyuh (250g)", price: 12000 },
+          { name: "Tempe Papan besar", price: 6000 },
+          { name: "Sayur Sup (Soun, jamur, wortel)", price: 12000 },
+          { name: "Bumbu & Gas harian (Alokasi)", price: 30000 }
+        ],
+        time: "40 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Bakso Sapi berkualitas (belah dua)", qty: 300, unit: "gram" },
+          { name: "Telur puyuh (rebus matang, kupas)", qty: 250, unit: "gram" },
+          { name: "Tempe papan (potong tebal 8 bagian)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Wortel (iris bulat motif)", qty: 150, unit: "gram" },
+          { name: "Jamur kuping hitam (rendam air panas, iris memanjang)", qty: 50, unit: "gram" },
+          { name: "Soun mentah (rendam air, tiriskan)", qty: 50, unit: "gram" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (cincang, tumis)", qty: 4, unit: "siung" },
+          { name: "Merica bubuk", qty: 1, unit: "sdt" },
+          { name: "Garam sup", qty: 2, unit: "sdt" },
+          { name: "Kaldu bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang merah bacem", qty: 4, unit: "siung" },
+          { name: "Bawang putih bacem", qty: 2, unit: "siung" },
+          { name: "Kecap manis bacem", qty: 5, unit: "sdm" },
+          { name: "Gula merah bacem (sisir)", qty: 1, unit: "keping" },
+          { name: "Ketumbar & Garam bacem", qty: 2, unit: "sdt" },
+          { name: "Daun salam", qty: 2, unit: "lembar" }
+        ],
+        steps: [
+          "Memasak Tempe Bacem: Tata tempe di dasar panci. Masukkan irisan bawang merah bawang putih, ketumbar, salam, kecap, gula merah, garam, dan air. Rebus tertutup sampai air asat meresap mewarnai tempe cokelat legit. Angkat.",
+          "Memasak Sup Kimlo: Didihkan 1.2 liter air di panci, masukkan tumisan bawang putih cincang beserta wortel dan jamur kuping hitam. Rebus selama 5 menit.",
+          "Masukkan bakso sapi potong dan telur puyuh rebus kupas ke dalam air bergolak.",
+          "Tambahkan bumbu garam, merica bubuk, dan kaldu bubuk. Koreksi rasa.",
+          "Matikan api kompor, masukkan soun, aduk pelan 1 menit sampai soun terurai menyatu."
+        ],
+        storageTips: [
+          "Ingat untuk memisahkan soun jika disajikan berkala agar kuah sup bening tidak terserap kering habis."
+        ],
+        kidTips: [
+          "Telur puyuh bulat imut adalah kesukaan utama balita karena bentuknya yang mini dan rasanya yang gurih empuk."
+        ],
+        nutrition: { protein: "Sangat melimpah (bakso sapi, telur puyuh padat nutrisi, nabati tempe bacem).", carbs: "Dari soun dan nasi pendamping.", fiber: "Serat jamur kuping hitam sehat pelancar BAB." }
+      },
+      {
+        id: 25,
+        name: "Ayam Goreng Tepung Crispy Saus Mentega Polos + Cah Buncis Jagung Pipil",
+        type: "Kering",
+        cost: 78000,
+        costDetails: [
+          { name: "Ayam Potong 1 kg", price: 40000 },
+          { name: "Buncis & Jagung Manis", price: 8000 },
+          { name: "Terigu, Margarin & Bumbu", price: 12000 },
+          { name: "Minyak & Gas (Alokasi)", price: 18000 }
+        ],
+        time: "40 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Ayam potong segar (potong mini 12 bagian agar garing meresap)", qty: 1, unit: "kg" }
+        ],
+        veggies: [
+          { name: "Buncis muda (iris tipis serong)", qty: 150, unit: "gram" },
+          { name: "Jagung manis (pipil bijinya)", qty: 1, unit: "buah" }
+        ],
+        spices: [
+          { name: "Telur ayam (pelapis)", qty: 1, unit: "butir" },
+          { name: "Tepung terigu", qty: 6, unit: "sdm" },
+          { name: "Tepung maizena", qty: 1, unit: "sdm" },
+          { name: "Margarin saus", qty: 3, unit: "sdm" },
+          { name: "Bawang putih saus (cincang)", qty: 1, unit: "siung" },
+          { name: "Kecap manis", qty: 3, unit: "sdm" },
+          { name: "Saus tiram", qty: 1, unit: "sdm" },
+          { name: "Bawang putih buncis (iris)", qty: 2, unit: "siung" },
+          { name: "Garam & Gula pasir", qty: 1.5, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Ayam Crispy Saus Mentega: Balur ayam potong dengan garam merica, celupkan ke telur kocok, gulingkan ke campuran terigu maizena remas halus.",
+          "Goreng dalam minyak banyak panas api sedang selama 12 menit sampai kuning keemasan garing. Tiriskan.",
+          "Di wajan bersih terpisah, lelehkan margarin. Tumis bawang putih cincang sampai wangi. Masukkan kecap manis, saus tiram, dan air (50 ml). Didihkan sampai mengental.",
+          "Masukkan ayam goreng crispy tepung tadi, aduk cepat sampai bumbu menyelimuti kulit ayam garing, matikan kompor.",
+          "Memasak Cah Buncis: Tumis bawang putih iris. Masukkan jagung manis pipil, buncis, dan sedikit air (30 ml). Beri garam dan gula pasir, tumis cepat 4 menit api besar sampai renyah."
+        ],
+        storageTips: [
+          "Simpan ayam garing saus mentega ini terpisah dari kelembapan cah buncis agar kerenyahan kulit luar tepungnya awet terjaga."
+        ],
+        kidTips: [
+          "Manis alami dari pipilan jagung kuning manis dipadu buncis hijau sangat mirip sayur steak mewah modern kesukaan anak."
+        ],
+        nutrition: { protein: "Hewani tinggi dari 1 kg ayam utuh renyah.", carbs: "Dari nasi putih.", fiber: "Kandungan serat larut dari jagung manis pipil dan buncis segar." }
+      },
+      {
+        id: 26,
+        name: "Sup Bakso Ikan Sawi Hijau Bening + Tahu Tempe Goreng Bumbu Ketumbar",
+        type: "Berkuah",
+        cost: 64000,
+        costDetails: [
+          { name: "Bakso Ikan Kemasan (500g)", price: 25000 },
+          { name: "Tahu Putih & Tempe papan", price: 10000 },
+          { name: "Sawi hijau caisim (2 ikat)", price: 6000 },
+          { name: "Bumbu & Gas minyak (Alokasi)", price: 23000 }
+        ],
+        time: "30 menit",
+        prepTime: "10 menit",
+        proteins: [
+          { name: "Bakso ikan putih (belah dua silang)", qty: 500, unit: "gram" },
+          { name: "Tahu putih jernih (potong belah 6 persegi)", qty: 1, unit: "kotak" },
+          { name: "Tempe gurih (potong belah 6 tebal)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Sawi hijau caisim (potong melintang 3 cm)", qty: 2, unit: "ikat besar" },
+          { name: "Daun bawang (iris)", qty: 1, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (geprek, tumis)", qty: 3, unit: "siung" },
+          { name: "Merica bubuk", qty: 1, unit: "sdt" },
+          { name: "Garam sup", qty: 2, unit: "sdt" },
+          { name: "Kaldu jamur", qty: 1, unit: "sdt" },
+          { name: "Bawang putih tahu (haluskan)", qty: 2, unit: "siung" },
+          { name: "Ketumbar bubuk tempe", qty: 1, unit: "sdt" },
+          { name: "Garam bumbu marinasi", qty: 1, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Tahu Tempe: Rendam tahu putih dan tempe dalam air bumbu marinasi ketumbar selama 10 menit.",
+          "Goreng dalam minyak panas api sedang sampai matang berkulit kuning kecokelatan tradisional. Tiriskan.",
+          "Memasak Sup Bakso Ikan: Didihkan 1.2 liter air di panci, masukkan langsung tumisan bawang putih geprek kuning kering beserta bakso ikan. Rebus 5 menit sampai bakso mengapung mekar mekar.",
+          "Tambahkan garam, merica, dan kaldu jamur. Koreksi rasa segar ala seafood oriental.",
+          "Masukkan potongan sawi hijau caisim, rebus singkat 2 menit saja di api sedang agar sawi matang tapi tetap hijau segar bergizi. Taburi daun bawang, sajikan."
+        ],
+        storageTips: [
+          "Sup bening bebas lemak jenuh kental sehingga sangat awet disimpan di kulkas dan cepat dipanaskan kembali hanya dalam 2 menit."
+        ],
+        kidTips: [
+          "Bakso ikan putih kenyal bebas bau amis menyerupai menu seafood resto sangat aman dinikmati buah hati tanpa enek."
+        ],
+        nutrition: { protein: "Hewani seafood bersih dari bakso ikan tinggi protein rendah kolesterol, plus nabati tahu tempe.", carbs: "Dari nasi hangat.", fiber: "Serat tinggi, kalsium, zat besi dari caisim hijau segar." }
+      },
+      {
+        id: 27,
+        name: "Telur Orak-Arik Jagung Manis Wortel + Tongkol Goreng Tepung Crispy",
+        type: "Kering",
+        cost: 66000,
+        costDetails: [
+          { name: "Pindang Tongkol Cue (1 kg)", price: 35000 },
+          { name: "Telur Ayam (4 butir)", price: 12000 },
+          { name: "Jagung & Wortel pendamping", price: 6000 },
+          { name: "Tepung bumbu & Gas (Alokasi)", price: 13000 }
+        ],
+        time: "30 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Pindang Tongkol Cue (buang kepala/duri, potong balok 4 cm)", qty: 1, unit: "kg" },
+          { name: "Telur ayam segar (kocok lepas)", qty: 4, unit: "butir" }
+        ],
+        veggies: [
+          { name: "Jagung manis (pipil bijinya)", qty: 1, unit: "buah" },
+          { name: "Wortel kecil (cincang dadu super kecil mikro 0.5 cm)", qty: 1, unit: "buah" }
+        ],
+        spices: [
+          { name: "Bawang merah orak-arik (iris)", qty: 2, unit: "siung" },
+          { name: "Bawang putih orak-arik (iris)", qty: 2, unit: "siung" },
+          { name: "Garam & Gula pasir", qty: 1, unit: "sdt" },
+          { name: "Merica bubuk", qty: 0.25, unit: "sdt" },
+          { name: "Tepung bumbu serbaguna", qty: 4, unit: "sdm" }
+        ],
+        steps: [
+          "Memasak Tongkol Goreng: Balurkan potongan daging tongkol cue bersih langsung ke tepung bumbu serbaguna kering sampai tertutup rata.",
+          "Goreng dalam minyak panas api sedang selama 6-7 menit sampai kering garing garing kecokelatan. Tiriskan. (Tepung kering mencegah ikan meletup saat digoreng).",
+          "Memasak Orak-Arik: Panaskan 2 sdm minyak. Tumis bawang merah dan bawang putih iris sampai wangi.",
+          "Masukkan pipilan jagung manis dan cincangan wortel mikro, beri 2 sdm air agar wortel melunak empuk (3 menit).",
+          "Pinggirkan sayur ke samping wajan, tuang kocokan telur di bagian kosong, aduk gerak cepat sampai hancur berserat (orak-arik) menyatu dengan jagung wortel. Beri garam, gula, dan merica, angkat."
+        ],
+        storageTips: [
+          "Orak-arik kering ini sangat bersahabat ditaruh di wadah bekal tanpa takut tumpah atau berair. Simpan tongkol crispy di wadah kering beralas tisu."
+        ],
+        kidTips: [
+          "Wortel cincang mikro seukuran jagung pipil ('invisible veggies') menyatu mulus dalam telur orak-arik kuning, menyamarkan sayur bagi anak pemilih."
+        ],
+        nutrition: { protein: "Hewani laut komplit kaya kalsium dari tongkol, ditambah asam amino lengkap telur ayam.", carbs: "Dari nasi hangat.", fiber: "Tinggi serat, beta karoten, dan vitamin dari jagung manis wortel." }
+      },
+      {
+        id: 28,
+        name: "Sup Asam-Asam Daging Sapi Bening + Tahu Bacem Manis Gurih",
+        type: "Berkuah",
+        cost: 96000,
+        costDetails: [
+          { name: "Daging Sapi Tetelan (500g)", price: 55000 },
+          { name: "Tahu Putih Besar (2 kotak)", price: 6000 },
+          { name: "Bahan Sayur Asam-Asam", price: 10000 },
+          { name: "Bumbu & Gas harian (Alokasi)", price: 25000 }
+        ],
+        time: "45 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Daging sapi tetelan/kisi (potong dadu mini 1.5 cm agar cepat empuk)", qty: 500, unit: "gram" },
+          { name: "Tahu putih (potong belah 6 bagian)", qty: 2, unit: "kotak besar" }
+        ],
+        veggies: [
+          { name: "Buncis muda (potong pendek 2 cm)", qty: 100, unit: "gram" },
+          { name: "Tomat merah segar (belah 6)", qty: 2, unit: "buah" },
+          { name: "Belimbing wuluh/sayur (potong bulat 1 cm)", qty: 4, unit: "buah" }
+        ],
+        spices: [
+          { name: "Bawang merah sup (iris)", qty: 5, unit: "siung" },
+          { name: "Bawang putih sup (iris)", qty: 3, unit: "siung" },
+          { name: "Daun salam", qty: 2, unit: "lembar" },
+          { name: "Lengkuas geprek", qty: 1, unit: "ruas" },
+          { name: "Kecap manis", qty: 5, unit: "sdm" },
+          { name: "Garam & Gula pasir", qty: 3, unit: "sdt" },
+          { name: "Kaldu sapi bubuk", qty: 1, unit: "sdt" },
+          { name: "Bawang putih bacem (haluskan)", qty: 3, unit: "siung" },
+          { name: "Kecap manis bacem", qty: 4, unit: "sdm" },
+          { name: "Gula merah bacem (sisir)", qty: 1, unit: "keping" },
+          { name: "Ketumbar & Garam bacem", qty: 2, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Tahu Bacem: Tata tahu di dasar panci. Masukkan bumbu halus bacem, kecap manis, gula merah, ketumbar, salam, garam, dan air sampai terendam setengah tinggi tahu. Rebus api sedang-kecil sampai menyusut cokelat manis meresap (20 menit). Angkat.",
+          "Memasak Sup Asam-Asam Daging: Didihkan 1.4 liter air di panci. Masukkan potongan daging dadu mini 1.5 cm ke air bergolak. Rebus api sedang 15 menit sambil buang busa kotorannya agar kuah jernih.",
+          "Tumis irisan bawang merah, bawang putih, salam, dan lengkuas sampai wangi layu. Masukkan bumbu tumis ke dalam panci daging.",
+          "Tambahkan kecap manis, garam, gula, dan kaldu sapi bubuk. Kecilkan api kompor, rebus 20 menit sampai serat daging empuk lumat.",
+          "Masukkan buncis, belimbing wuluh, dan belahan tomat merah. Rebus singkat 5 menit sampai buncis matang kuah asam manis segar jernih. Angkat."
+        ],
+        storageTips: [
+          "Sup daging ini rasanya semakin gurih lezat setelah dipanaskan berulang kali. Dinginkan, taruh di kulkas, hangatkan kembali 3 menit sampai lemaknya mencair gurih."
+        ],
+        kidTips: [
+          "Daging dipotong super mini (1.5 cm) agar anak balita mudah mengunyah tanpa presto lama. Kuah asam manis gurih sangat memicu lahap makan."
+        ],
+        nutrition: { protein: "Zat besi heme murni pencegah anemia dari daging sapi berkualitas, dan protein tahu bacem.", carbs: "Karbohidrat nasi putih.", fiber: "Vitamin C alami tinggi dari tomat segar belimbing wuluh dan buncis." }
+      },
+      {
+        id: 29,
+        name: "Ayam Crispy Saus Lemon Madu Bening + Tumis Sawi Hijau Tahu Putih",
+        type: "Kering",
+        cost: 76000,
+        costDetails: [
+          { name: "Dada Ayam Fillet 1 kg", price: 45000 },
+          { name: "Sawi hijau & Tahu", price: 7000 },
+          { name: "Lemon lokal, Madu, Tepung", price: 10000 },
+          { name: "Minyak & Gas harian (Alokasi)", price: 14000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Dada ayam fillet (potong tipis seukuran jempol)", qty: 1, unit: "kg" },
+          { name: "Tahu putih (potong dadu kecil 2 cm, goreng berkulit)", qty: 1, unit: "kotak" }
+        ],
+        veggies: [
+          { name: "Sawi hijau/caisim (potong melintang 3 cm)", qty: 2, unit: "ikat besar" }
+        ],
+        spices: [
+          { name: "Telur ayam pelapis", qty: 1, unit: "butir" },
+          { name: "Tepung terigu", qty: 5, unit: "sdm" },
+          { name: "Tepung maizena renyah", qty: 2, unit: "sdm" },
+          { name: "Garam & Merica bubuk", qty: 1.5, unit: "sdt" },
+          { name: "Bawang putih saus (cincang)", qty: 1, unit: "siung" },
+          { name: "Air jeruk lemon lokal", qty: 2, unit: "sdm" },
+          { name: "Madu asli (sachet)", qty: 2, unit: "sdm" },
+          { name: "Gula pasir & Garam saus", qty: 1.5, unit: "sdt" },
+          { name: "Larutan maizena pengental", qty: 1, unit: "sdt" },
+          { name: "Bawang putih sawi (iris)", qty: 2, unit: "siung" }
+        ],
+        steps: [
+          "Memasak Ayam Crispy: Marinasi dada ayam fillet dengan garam merica, celupkan ke telur kocok, gulingkan ke campuran terigu maizena remas cubit.",
+          "Goreng dalam minyak banyak panas api sedang 8-10 menit sampai garing kuning emas. Tiriskan.",
+          "Memasak Saus Lemon: Di teflon terpisah, tumis bawang putih cincang sampai wangi. Tuang air (150 ml), air jeruk lemon, madu, gula, dan garam. Didihkan.",
+          "Tuang larutan maizena perlahan sambil diaduk cepat sampai mengental jernih bening mengkilap ala oriental, matikan api, sisihkan terpisah.",
+          "Memasak Tumis Sawi Tahu: Tumis bawang putih iris. Masukkan tahu berkulit, sawi caisim, garam, dan gula. Tumis api besar gerak kilat 2-3 menit sampai sawi layu segar hijau cerah. Angkat."
+        ],
+        storageTips: [
+          "Wajib memisahkan saus lemon madu dengan wadah ayam garing agar kulit crispy tepungnya tidak melembut lembek di siang malam hari."
+        ],
+        kidTips: [
+          "Rasa manis legit jeruk lemon segar tanpa duri/tulang mempermudah balita lahap menyuap sendiri piring bekal sekolahnya."
+        ],
+        nutrition: { protein: "Dada ayam fillet murni bebas lemak jahat, serta protein tahu.", carbs: "Dari nasi putih.", fiber: "Kandungan serat kalsium zat besi tinggi dari tumis sawi caisim." }
+      },
+      {
+        id: 30,
+        name: "Sup Bakso Ayam Telur Puyuh + Tahu Tempe Bacem Kering",
+        type: "Berkuah",
+        cost: 72000,
+        costDetails: [
+          { name: "Bakso Ayam (500g)", price: 25000 },
+          { name: "Telur Puyuh (250g)", price: 12000 },
+          { name: "Tahu Putih & Tempe", price: 10000 },
+          { name: "Sayur Sup Bening", price: 8000 },
+          { name: "Bumbu & Gas harian (Alokasi)", price: 17000 }
+        ],
+        time: "35 menit",
+        prepTime: "15 menit",
+        proteins: [
+          { name: "Bakso ayam bulat (belah dua silang atas)", qty: 500, unit: "gram" },
+          { name: "Telur puyuh rebus (kupas bersih)", qty: 250, unit: "gram" },
+          { name: "Tahu putih (potong belah persegi)", qty: 1, unit: "kotak besar" },
+          { name: "Tempe papan (potong belah tebal)", qty: 1, unit: "papan" }
+        ],
+        veggies: [
+          { name: "Wortel (iris bulat tebal 1 cm)", qty: 150, unit: "gram" },
+          { name: "Kembang kol (potong kuntum kuntum)", qty: 150, unit: "gram" },
+          { name: "Seledri & Daun bawang (iris kasar)", qty: 2, unit: "batang" }
+        ],
+        spices: [
+          { name: "Bawang putih sup (geprek, tumis garing)", qty: 4, unit: "siung" },
+          { name: "Merica bubuk", qty: 1, unit: "sdt" },
+          { name: "Garam sup", qty: 2, unit: "sdt" },
+          { name: "Kaldu jamur", qty: 1, unit: "sdt" },
+          { name: "Bawang merah bacem (iris)", qty: 4, unit: "siung" },
+          { name: "Bawang putih bacem (iris)", qty: 2, unit: "siung" },
+          { name: "Kecap manis bacem", qty: 5, unit: "sdm" },
+          { name: "Gula merah bacem (sisir)", qty: 1, unit: "keping" },
+          { name: "Ketumbar & Garam bacem", qty: 2, unit: "sdt" }
+        ],
+        steps: [
+          "Memasak Bacem Tradisional: Tata tahu dan tempe di panci datar. Masukkan bawang merah, bawang putih, ketumbar, daun salam, kecap manis, gula merah, garam, dan air sampai terendam setengah tahu. Rebus api sedang sampai asat menyusut kering mengkaramel cokelat (22 menit). Angkat.",
+          "Memasak Sup Bakso Puyuh: Didihkan 1.2 liter air di panci, masukkan langsung bawang putih goreng geprek beserta potongan wortel. Rebus api sedang selama 5 menit.",
+          "Masukkan potongan bakso ayam belah silang dan telur puyuh rebus kupas ke kuah mendidih.",
+          "Tambahkan garam, merica, dan kaldu jamur. Aduk pelan seimbang.",
+          "Masukkan kuntum kembang kol, rebus singkat 3 menit sampai matang empuk renyah. Taburi daun bawang seledri, matikan kompor, hidangkan."
+        ],
+        storageTips: [
+          "Sup penutup akhir bulan ini sangat praktis dipanaskan. Bagi porsi terpisah siang-malam di dalam kulkas agar tidak mudah basi."
+        ],
+        kidTips: [
+          "Butiran telur puyuh bulat imut dan bakso ayam empuk adalah magnet nafsu makan anak yang paling dijamin anti-GTM."
+        ],
+        nutrition: { protein: "Hewani bersih (bakso ayam, telur puyuh kolin tinggi untuk otak), serta nabati tahu tempe bacem asam amino esensial.", carbs: "Dari nasi hangat.", fiber: "Kaya vitamin dan kalsium alami dari wortel dan kembang kol segar." }
+      }
+    ];
+
+    // ----------------------------------------------------
+    // GUIDE DATA MODEL
+    // ----------------------------------------------------
+    const guideData = {
+      bumbu: {
+        title: "🧂 Bumbu Dasar Utama yang Wajib Tersedia",
+        content: `
+          <p class="text-sm text-gray-600 mb-4">Agar proses memasak setiap pagi tidak memakan waktu lama, bumbu-bumbu ini wajib dibeli dalam jumlah stok bulanan dan ditaruh di wadah kering/kulkas:</p>
+          <div class="space-y-4">
+            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100">
+              <span class="font-bold text-gray-900 block text-sm">🧄 Bumbu Segar Utama</span>
+              <p class="text-xs text-gray-500 mt-1">Bawang Merah, Bawang Putih, Bawang Bombay.</p>
+            </div>
+            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100">
+              <span class="font-bold text-gray-900 block text-sm">🌱 Rempah Empon-Empon</span>
+              <p class="text-xs text-gray-500 mt-1">Jahe (penghilang amis sup/ikan), Kunyit (pewarna alami), Lengkuas (geprekan tumis), Sereh Batang, Daun Salam, Daun Jeruk Purut.</p>
+            </div>
+            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100">
+              <span class="font-bold text-gray-900 block text-sm">🥫 Bumbu Cairan Botol / Pack</span>
+              <p class="text-xs text-gray-500 mt-1">Kecap Manis Kental, Saus Tiram Gurih, Saus Tomat Manis (saus fuyunghai), Margarin Masak, Santan Instan Cair Cair Kemasan Kecil (@65ml).</p>
+            </div>
+            <div class="p-3 bg-gray-50 rounded-xl border border-gray-100">
+              <span class="font-bold text-gray-900 block text-sm">🧂 Bumbu Kering & Penyedap</span>
+              <p class="text-xs text-gray-500 mt-1">Garam Halus, Gula Pasir, Gula Merah, Merica/Lada Bubuk, Ketumbar Bubuk Murni (gorengan ikan/tempe), Pala Bubuk, Kaldu Ayam & Sapi Bubuk, Tepung Maizena/Sagu (pengental), Tepung Terigu & Tepung Beras (pelapis garing).</p>
+            </div>
+          </div>
+        `
+      },
+      sayur: {
+        title: "🥬 Sayuran Paling Hemat (Harga Stabil di Indonesia)",
+        content: `
+          <p class="text-sm text-gray-600 mb-4">Sayur-sayuran berikut memiliki harga ekonomis, kaya serat larut, tidak fluktuatif ekstrem di pasar, dan sangat mudah diolah disukai anak kecil:</p>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-gray-50 text-gray-500">
+                  <th class="p-2 border-b">Nama Sayur</th>
+                  <th class="p-2 border-b">Estimasi Harga</th>
+                  <th class="p-2 border-b">Keunggulan Gizi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100">
+                <tr>
+                  <td class="p-2 font-semibold">Sawi Putih</td>
+                  <td class="p-2">Rp8.000 - Rp10.000 / kg</td>
+                  <td class="p-2 text-gray-500">Awet di kulkas hingga 1 minggu, tekstur lembut setelah ditumis/sup cocok untuk balita GTM.</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-semibold">Wortel Lokal</td>
+                  <td class="p-2">Rp10.000 - Rp12.000 / kg</td>
+                  <td class="p-2 text-gray-500">Sumber Vitamin A tertinggi, bertekstur keras sehingga awet, rasa manis alami disukai anak.</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-semibold">Labu Siam</td>
+                  <td class="p-2">Rp6.000 - Rp8.000 / kg</td>
+                  <td class="p-2 text-gray-500">Kandungan air tinggi penyegar tubuh, harga murah, tekstur sangat empuk lunak ramah anak.</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-semibold">Tauge</td>
+                  <td class="p-2">Rp3.000 - Rp4.000 / pak</td>
+                  <td class="p-2 text-gray-500">Protein nabati dan enzim muda tinggi, waktu memasak super kilat (1-2 menit saja), tekstur segar.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      protein: {
+        title: "🥩 Protein Paling Murah Berdasarkan Rasio Harga",
+        content: `
+          <p class="text-sm text-gray-600 mb-4">Urutan protein terbaik paling ramah kantong anggaran Rp100.000 per hari dengan kandungan nutrisi optimal:</p>
+          <div class="space-y-3 text-xs">
+            <div class="flex gap-2">
+              <span class="font-bold text-brand-600">1.</span>
+              <div><strong class="text-gray-900">Tempe Kedelai Tradisional:</strong> Protein nabati nomor satu paling murah sedunia. Satu papan besar Rp5.000 bisa dibagi 10-12 porsi makan kaya kalsium.</div>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-bold text-brand-600">2.</span>
+              <div><strong class="text-gray-900">Tahu Putih Polos:</strong> Rp5.000 per kotak besar. Sangat lembut, serbaguna dijadikan campuran telur dadar, perkedel, sup bening, atau fuyunghai.</div>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-bold text-brand-600">3.</span>
+              <div><strong class="text-gray-900">Ikan Lele Segar:</strong> Hewani segar termurah di pasar (Rp28k-Rp32k per kg isi 6-8 ekor). Bebas duri menyusup di dalam daging, tinggi fosfor zat besi.</div>
+            </div>
+            <div class="flex gap-2">
+              <span class="font-bold text-brand-600">4.</span>
+              <div><strong class="text-gray-900">Telur Ayam Negeri:</strong> Sumber protein hewani asam amino terlengkap paling praktis dimasak kilat (dadar gulung, tamagoyaki, orak-arik sayur).</div>
+            </div>
+          </div>
+        `
+      },
+      mealprep: {
+        title: "⏱️ Tips Meal Prep 1 Jam di Hari Minggu Sore",
+        content: `
+          <p class="text-sm text-gray-600 mb-4">Gunakan waktu 1 jam saja di hari Minggu sore setelah pulang belanja pasar untuk persiapan taktis ini agar setiap pagi tinggal menumis/merebus kilat 15 menit saja:</p>
+          <ul class="list-disc list-inside space-y-2 text-xs text-gray-600">
+            <li><strong>Langkah 1: Baceman Bawang (Waktu: 15 menit)</strong><br>Kupas bawang merah & putih sekaligus. Blender bawang putih dengan sedikit minyak goreng, taruh di wadah kaca rapat di kulkas. Ini bumbu sakti instan tumis sup!</li>
+            <li><strong>Langkah 2: Food Prep Protein (Waktu: 20 menit)</strong><br>Cuci bersih ayam, bagi per porsi wadah. Lumuri dengan bumbu ungkep atau bumbu mentega dalam wadah kulkas. Siangi ikan lele/kembung, lumuri ketumbar kunyit, taruh di freezer.</li>
+            <li><strong>Langkah 3: Potong Sayuran Keras (Waktu: 15 menit)</strong><br>Kupas wortel dan buncis, iris sesuai menu. Taruh di wadah kering berlapis tisu (Jangan dicuci sebelum disimpan agar tidak busuk. Cuci sayur hanya saat akan dimasak hari-H).</li>
+          </ul>
+        `
+      },
+      energy: {
+        title: "🔥 Trik Hemat Gas Elpiji & Listrik Saat Memasak",
+        content: `
+          <p class="text-sm text-gray-600 mb-4">Praktikkan trik operasional dapur berikut agar tagihan bulanan energi tetap aman:</p>
+          <ul class="list-disc list-inside space-y-2 text-xs text-gray-600">
+            <li><strong>Gunakan Penutup Panci Rapat (Hemat Gas 30%):</strong> Menutup panci menahan tekanan uap panas di dalam ruang rebus sehingga air mendidih jauh lebih cepat dan ayam menjadi empuk kilat.</li>
+            <li><strong>Trik Potongan Kecil / Mini Masakan:</strong> Potong daging rawon/asam-asam seukuran 1.5 cm. Makin kecil luas permukaan, makin cepat panas menembus bagian inti serat makanan, memangkas waktu rebus kompor.</li>
+            <li><strong>Manfaatkan Energi Panas Laten Pasif:</strong> Sesaat setelah sayuran sup (brokoli, sawi, soun) dimasukkan kuah mendidih, langsung matikan kompor dan pasang penutup panci rapat-rapat. Sisa panas air mendidih mematangkan sayuran secara mandiri.</li>
+          </ul>
+        `
+      },
+      kids: {
+        title: "👶 Mengatasi Anak GTM & Bosan (Anti-Bosan Visual)",
+        content: `
+          <p class="text-sm text-gray-600 mb-4">Anak kecil menyukai tampilan visual. Wujud bentuk di atas piring adalah kunci utama memancing selera makannya:</p>
+          <ul class="list-disc list-inside space-y-2 text-xs text-gray-600">
+            <li><strong>Potong Estetik (Cetakan Wortel Bunga):</strong> Gunakan cetakan kue plastik murah berbentuk bunga/bintang untuk mencetak wortel sup. Tampilan atraktif ini menyulap wortel menjadi "bunga manis" di mata anak.</li>
+            <li><strong>Piring Sekat / Kuah Terpisah:</strong> Jangan guyur nasi garing anak sampai banjir lembek. Tata lauk kering garing (mendoan, tahu crispy) di piring datar, dan letakkan satu mangkok kuah kecil di sampingnya. Biarkan anak celup-celup (*dipping*) sendiri.</li>
+            <li><strong>Bento Bola Nasi Kepal (*Rice Balls*):</strong> Ambil nasi hangat, remas bulat menjadi bola mini seukuran bola pingpong. Gulingkan di atas remah halus mendoan kering atau telur dadar suwir. Tampilan bulat lucu ini seketika memicu rasa penasaran anak!</li>
+          </ul>
+        `
+      }
+    };
+
+    // Weekly Grocery lists based on the provided guide
+    const weeklyGroceries = [
+      {
+        week: "REKAP MINGGU 1 (Hari 1 s.d Hari 7)",
+        proteinHewani: ["Ayam Potong Segar (3 kg): Rp120.000", "Bakso Ayam Siap Pakai (1 kg): Rp50.000", "Telur Puyuh Rebus (250g): Rp12.000", "Ikan Kembung Segar (1 kg): Rp42.000", "Dada Ayam Fillet Murni (500g): Rp23.000", "Pindang Tongkol Cue Segar (1 kg): Rp35.000"],
+        proteinNabati: ["Tahu Putih Sutra/Biasa (5 kotak): Rp25.000", "Tempe Papan Tradisional (3 papan): Rp16.000"],
+        veggies: ["Sawi Putih, Wortel, Kentang, Kembang Kol, Ketimun, Tomat Merah, Buncis, Jagung Manis, Labu Siam, Jamur Kuping, Bunga Sedap Malam, Soun, Tauge, Kacang Panjang, Kemangi, Selada Air: Rp67.000"],
+        spices: ["Bawang Merah, Bawang Putih, Bombay, Margarin, Kecap, Saus Tiram, Kecap Inggris, Asam Jawa, Gula Merah, Lengkuas, Sereh, Salam, Daun Jeruk, Terigu, Tepung Beras/Bumbu, Minyak Goreng (2 Liter), Alokasi Gas Elpiji 3kg: Rp160.000"],
+        total: 550000,
+        average: 78500
+      },
+      {
+        week: "REKAP MINGGU 2 (Hari 8 s.d Hari 14)",
+        proteinHewani: ["Daging Sapi Sengkel/Kisi (500g): Rp55.000", "Telur Asin Matang (4 butir): Rp14.000", "Telur Ayam Negeri Segar (11 butir / ±700g): Rp27.000", "Dada Ayam Fillet (300g): Rp15.000", "Ayam Potong Segar (2 kg): Rp80.000", "Ikan Lele Segar Hidup (1 kg): Rp32.000", "Bakso Ikan/Sapi Seafood Campur (1 kg): Rp53.000"],
+        proteinNabati: ["Tahu Putih Segar Kotak (4 kotak): Rp21.000", "Tempe Papan Tradisional (3 papan): Rp16.000"],
+        veggies: ["Tauge Pendek Rawon, Daun Bawang, Seledri, Kol, Wortel, Kacang Polong, Tomat Hijau, Belimbing Wuluh, Daun Pisang/Selada, Labu Siam, Kacang Panjang, Daun Melinjo, Caisim: Rp62.000"],
+        spices: ["Kluwek, Santan Instan Cair, Madu Sachet, Gula Merah, Maizena, Saus Tomat, Minyak Goreng, Bumbu Dapur: Rp135.000"],
+        total: 510000,
+        average: 72800
+      },
+      {
+        week: "REKAP MINGGU 3 (Hari 15 s.d Hari 21)",
+        proteinHewani: ["Dada Ayam Fillet Tanpa Tulang (2 kg): Rp90.000", "Teri Medan Asin Gurih (50g): Rp6.000", "Ayam Potong Segar (1 kg): Rp40.000", "Telur Ayam Negeri Segar (9 butir): Rp24.000", "Sosis Sapi/Ayam Premium (5 batang): Rp10.000", "Bakso Ayam Siap Saji (500g): Rp25.000", "Ikan Kembung Segar (1 kg): Rp42.000"],
+        proteinNabati: ["Tahu Putih Polos (4 kotak): Rp21.000", "Tempe Papan Tradisional (2.5 papan): Rp14.000"],
+        veggies: ["Kacang Panjang, Kentang, Seledri, Wortel, Kol, Buncis, Tomat Merah, Belimbing Wuluh, Oyong, Soun, Tauge, Sawi Putih: Rp61.000"],
+        spices: ["Madu Sachet Crispy, Bawang Putih/Merah, Jahe Kunyit Sereh, Tepung Bumbu, Margarin, Minyak Goreng, Santan Kental: Rp120.000"],
+        total: 453000,
+        average: 64700
+      },
+      {
+        week: "REKAP MINGGU 4 (Hari 22 s.d Hari 30 - 9 Hari)",
+        proteinHewani: ["Bakso Sapi Murni (800g): Rp48.000", "Telur Ayam Negeri Segar (14 butir / ±1 kg): Rp32.000", "Dada Ayam Fillet Tanpa Tulang (2 kg): Rp90.000", "Telur Puyuh Rebus (250g): Rp12.000", "Ayam Potong Segar (2 kg): Rp80.000", "Bakso Ikan Putih (1 kg): Rp50.000", "Pindang Tongkol Cue (1 kg): Rp35.000", "Daging Sapi Tetelan/Kisi (500g): Rp55.000"],
+        proteinNabati: ["Tahu Putih Jernih (7 kotak): Rp35.000", "Tempe Papan Tradisional (5 papan): Rp26.000"],
+        veggies: ["Wortel, Brokoli Hijau, Seledri, Bawang Bombay, Jamur Kuping, Soun, Buncis, Jagung Manis, Caisim, Tomat, Belimbing Wuluh, Kembang Kol: Rp85.000"],
+        spices: ["Bawang Putih/Merah, Tepung Tapioka/Sagu, Maizena, Jeruk Lemon Lokal, Madu Sachet, Gula Merah, Kecap Manis, Saus Tiram, Minyak Goreng, Refill Gas: Rp155.000"],
+        total: 618000,
+        average: 68600
+      }
+    ];
+
+    // ----------------------------------------------------
+    // APP STATE MANAGEMENT
+    // ----------------------------------------------------
+    let activeRecipeId = 1;
+    let currentFilter = 'semua';
+    let currentPortion = 4; // Default portions
+    let cookedDays = new Set(); // Tracks cooked days in-memory (no localStorage allowed)
+
+    // Global Timer State
+    let timerDuration = 300; // Default 5 mins in secs
+    let timerInterval = null;
+    let timerRunning = false;
+
+    // ----------------------------------------------------
+    // INITIALIZATION & EVENT LISTENERS
+    // ----------------------------------------------------
+    window.onload = function() {
+      // 1. Build Day Sidebar list
+      renderDaysList();
+      // 2. Load active recipe 1
+      loadRecipe(1);
+      // 3. Render weekly groceries
+      renderGroceries();
+      // 4. Set first guide
+      selectGuide('bumbu');
+      // 5. Setup progress indicator
+      updateProgress();
+    };
+
+    // ----------------------------------------------------
+    // VIEW SWITCHER TABS
+    // ----------------------------------------------------
+    function switchTab(tabId) {
+      // Manage tabs visual state
+      const tabs = ['menu', 'grocery', 'guides'];
+      tabs.forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        if (t === tabId) {
+          el.classList.add('border-brand-600', 'text-brand-700');
+          el.classList.remove('border-transparent', 'text-gray-500');
+        } else {
+          el.classList.remove('border-brand-600', 'text-brand-700');
+          el.classList.add('border-transparent', 'text-gray-500');
+        }
+      });
+
+      // Manage viewports visibility
+      const views = ['view-menu', 'view-grocery', 'view-guides'];
+      views.forEach(v => {
+        const el = document.getElementById(v);
+        if (v === `view-${tabId}`) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // RENDER DAYS SIDEBAR LIST
+    // ----------------------------------------------------
+    function renderDaysList() {
+      const container = document.getElementById('days-list-container');
+      container.innerHTML = '';
+
+      menuData.forEach(day => {
+        const isGanjil = day.id % 2 !== 0;
+        const typeLabel = isGanjil ? 'Kering' : 'Kuah';
+        const isCooked = cookedDays.has(day.id);
+
+        const card = document.createElement('button');
+        card.id = `day-btn-${day.id}`;
+        card.onclick = () => loadRecipe(day.id);
+        card.className = `w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between gap-2 group ${
+          day.id === activeRecipeId 
+            ? 'bg-brand-50 border-brand-200 text-brand-900 shadow-sm ring-1 ring-brand-200' 
+            : 'bg-white border-gray-100 text-gray-700 hover:bg-gray-50 hover:border-gray-200'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs ${
+              day.id === activeRecipeId 
+                ? 'bg-brand-600 text-white' 
+                : 'bg-gray-100 text-gray-500 group-hover:bg-brand-100 group-hover:text-brand-700'
+            }">
+              H${day.id}
+            </span>
+            <div class="min-w-0">
+              <span class="font-bold text-xs block text-gray-950 truncate">${day.name}</span>
+              <span class="text-[10px] text-gray-400 font-medium flex items-center gap-1 mt-0.5">
+                ${typeLabel === 'Kering' ? '🍳' : '🥣'} ${typeLabel} • Rp${day.cost.toLocaleString('id-ID')}
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            ${isCooked ? `
+              <span class="w-4 h-4 bg-brand-500 text-white rounded-full flex items-center justify-center text-[10px] font-bold">✓</span>
+            ` : ''}
+            <svg class="w-4 h-4 text-gray-400 group-hover:text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ----------------------------------------------------
+    // FILTER DAYS SIDEBAR
+    // ----------------------------------------------------
+    function setFilter(filter) {
+      currentFilter = filter;
+      const buttons = ['semua', 'ganjil', 'genap'];
+      buttons.forEach(b => {
+        const el = document.getElementById(`btn-filter-${b}`);
+        if (b === filter) {
+          el.className = "bg-brand-600 text-white font-bold text-xs py-1.5 px-2 rounded-lg transition-all";
+        } else {
+          el.className = "bg-gray-100 text-gray-600 hover:bg-gray-200 font-semibold text-xs py-1.5 px-2 rounded-lg transition-all";
+        }
+      });
+      filterDays();
+    }
+
+    function filterDays() {
+      const searchVal = document.getElementById('menu-search').value.toLowerCase();
+      menuData.forEach(day => {
+        const el = document.getElementById(`day-btn-${day.id}`);
+        const isGanjil = day.id % 2 !== 0;
+        const matchesSearch = day.name.toLowerCase().includes(searchVal);
+        
+        let matchesFilter = true;
+        if (currentFilter === 'ganjil' && !isGanjil) matchesFilter = false;
+        if (currentFilter === 'genap' && isGanjil) matchesFilter = false;
+
+        if (matchesSearch && matchesFilter) {
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // PORTION CONTROLLER & INGREDIENT SCALER
+    // ----------------------------------------------------
+    function updatePortion(delta) {
+      const newVal = currentPortion + delta;
+      if (newVal < 1 || newVal > 20) return;
+      currentPortion = newVal;
+      document.getElementById('portion-value').innerText = `${currentPortion} Orang`;
+      
+      // Rescale active recipe ingredients live
+      renderIngredients();
+    }
+
+    function renderIngredients() {
+      const recipe = menuData.find(r => r.id === activeRecipeId);
+      if (!recipe) return;
+
+      const scale = currentPortion / 4; // Ratio based on baseline 4 people
+      
+      // Render Proteins
+      const proteinContainer = document.getElementById('proteins-container');
+      proteinContainer.innerHTML = '';
+      recipe.proteins.forEach((p, idx) => {
+        const itemLi = document.createElement('li');
+        itemLi.className = "flex items-start gap-2.5 text-sm text-gray-700 py-1.5";
+        const scaledQty = parseFloat((p.qty * scale).toFixed(2));
+        itemLi.innerHTML = `
+          <input type="checkbox" class="mt-1 rounded border-gray-300 text-brand-600 focus:ring-brand-500 w-4 h-4 cursor-pointer">
+          <span><strong class="text-gray-900">${scaledQty} ${p.unit}</strong> ${p.name}</span>
+        `;
+        proteinContainer.appendChild(itemLi);
+      });
+
+      // Render Veggies
+      const vegContainer = document.getElementById('veggies-container');
+      vegContainer.innerHTML = '';
+      recipe.veggies.forEach((v, idx) => {
+        const itemLi = document.createElement('li');
+        itemLi.className = "flex items-start gap-2.5 text-sm text-gray-700 py-1.5";
+        const scaledQty = parseFloat((v.qty * scale).toFixed(2));
+        itemLi.innerHTML = `
+          <input type="checkbox" class="mt-1 rounded border-gray-300 text-brand-600 focus:ring-brand-500 w-4 h-4 cursor-pointer">
+          <span><strong class="text-gray-900">${scaledQty} ${v.unit}</strong> ${v.name}</span>
+        `;
+        vegContainer.appendChild(itemLi);
+      });
+
+      // Render Spices
+      const spicesContainer = document.getElementById('spices-container');
+      spicesContainer.innerHTML = '';
+      recipe.spices.forEach((s, idx) => {
+        const itemLi = document.createElement('li');
+        itemLi.className = "flex items-start gap-2.5 text-sm text-gray-700 py-1.5";
+        const scaledQty = parseFloat((s.qty * scale).toFixed(2));
+        itemLi.innerHTML = `
+          <input type="checkbox" class="mt-1 rounded border-gray-300 text-brand-600 focus:ring-brand-500 w-4 h-4 cursor-pointer">
+          <span><strong class="text-gray-900">${scaledQty} ${s.unit}</strong> ${s.name}</span>
+        `;
+        spicesContainer.appendChild(itemLi);
+      });
+
+      // Update estimated dynamic cost
+      const costDisplay = document.getElementById('dynamic-cost-display');
+      if (costDisplay) {
+        const scaledCost = Math.round(recipe.cost * scale);
+        costDisplay.innerHTML = `Estimasi Biaya Porsi ini: <strong class="text-brand-700">Rp${scaledCost.toLocaleString('id-ID')}</strong>`;
+      }
+    }
+
+    // ----------------------------------------------------
+    // LOAD RECIPE DETAILS VIA ID
+    // ----------------------------------------------------
+    function loadRecipe(recipeId) {
+      activeRecipeId = recipeId;
+      
+      // Update sidebar visual class highlight
+      menuData.forEach(day => {
+        const sidebarBtn = document.getElementById(`day-btn-${day.id}`);
+        if (sidebarBtn) {
+          if (day.id === recipeId) {
+            sidebarBtn.className = "w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between gap-2 group bg-brand-50 border-brand-200 text-brand-900 shadow-sm ring-1 ring-brand-200";
+          } else {
+            sidebarBtn.className = "w-full text-left p-3.5 rounded-xl border transition-all flex items-center justify-between gap-2 group bg-white border-gray-100 text-gray-700 hover:bg-gray-50 hover:border-gray-200";
+          }
+        }
+      });
+
+      const recipe = menuData.find(r => r.id === recipeId);
+      if (!recipe) return;
+
+      const container = document.getElementById('active-recipe-card');
+      const isCooked = cookedDays.has(recipe.id);
+
+      // Render Layout Skeleton
+      container.innerHTML = `
+        <div class="p-6 border-b border-gray-100 bg-brand-50/50">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-xs font-extrabold uppercase tracking-widest text-brand-700 mb-1 block">Hari ${recipe.id} • ${recipe.type}</span>
+              <h2 class="text-xl sm:text-2xl font-extrabold text-gray-950">${recipe.name}</h2>
+            </div>
+            
+            <!-- Cook Status Button -->
+            <button id="cooked-toggle-btn" onclick="toggleCookedStatus(${recipe.id})" class="px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border ${
+              isCooked 
+                ? 'bg-brand-600 border-brand-600 text-white hover:bg-brand-700' 
+                : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
+            }">
+              <span>${isCooked ? '✓ Telah Dimasak' : 'Tandai Selesai Masak'}</span>
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
+            <div class="bg-white p-3 rounded-xl border border-gray-100 text-center">
+              <span class="text-[10px] text-gray-400 font-semibold block uppercase">Biaya (4 Orang)</span>
+              <span class="text-sm font-bold text-gray-900 mt-1 block">Rp${recipe.cost.toLocaleString('id-ID')}</span>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-gray-100 text-center">
+              <span class="text-[10px] text-gray-400 font-semibold block uppercase">Persiapan</span>
+              <span class="text-sm font-bold text-gray-900 mt-1 block">${recipe.prepTime}</span>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-gray-100 text-center">
+              <span class="text-[10px] text-gray-400 font-semibold block uppercase">Durasi Masak</span>
+              <span class="text-sm font-bold text-gray-900 mt-1 block">${recipe.time}</span>
+            </div>
+            <div class="bg-white p-3 rounded-xl border border-gray-100 text-center cursor-pointer hover:bg-brand-50 transition-colors" onclick="setTimerFromRecipe()">
+              <span class="text-[10px] text-gray-400 font-semibold block uppercase">Atur Timer</span>
+              <span class="text-sm font-bold text-brand-600 mt-1 block flex items-center justify-center gap-1">⏱️ Jalankan</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+          
+          <!-- INGREDIENTS AREA (Portion scale integrated) -->
+          <div class="md:col-span-5 space-y-4">
+            <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+              <h3 class="font-bold text-sm text-gray-900 flex items-center gap-1.5">📖 Bahan Makanan</h3>
+              <!-- Portion Selector UI -->
+              <div class="flex items-center gap-2 bg-gray-50 rounded-xl p-1 border border-gray-100">
+                <button onclick="updatePortion(-1)" class="w-6 h-6 rounded-lg bg-white shadow-xs hover:bg-gray-100 flex items-center justify-center font-bold text-sm text-gray-600">-</button>
+                <span id="portion-value" class="text-xs font-bold text-gray-900 px-1">${currentPortion} Orang</span>
+                <button onclick="updatePortion(1)" class="w-6 h-6 rounded-lg bg-white shadow-xs hover:bg-gray-100 flex items-center justify-center font-bold text-sm text-gray-600">+</button>
+              </div>
+            </div>
+
+            <!-- Estimated Rescaled Cost -->
+            <div id="dynamic-cost-display" class="bg-brand-50 p-3 rounded-xl border border-brand-100/50 text-xs text-brand-800 font-medium"></div>
+
+            <!-- Protein Subtitle -->
+            <div>
+              <span class="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block mb-2">Bahan Protein</span>
+              <ul id="proteins-container" class="divide-y divide-gray-50"></ul>
+            </div>
+
+            <!-- Veg Subtitle -->
+            <div>
+              <span class="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block mb-2">Bahan Sayur</span>
+              <ul id="veggies-container" class="divide-y divide-gray-50"></ul>
+            </div>
+
+            <!-- Spices Subtitle -->
+            <div>
+              <span class="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest block mb-2">Bumbu-Bumbu</span>
+              <ul id="spices-container" class="divide-y divide-gray-50"></ul>
+            </div>
+          </div>
+
+          <!-- INSTRUCTIONS AREA -->
+          <div class="md:col-span-7 space-y-6">
+            <div>
+              <h3 class="font-bold text-sm text-gray-900 border-b border-gray-100 pb-3 mb-3 flex items-center gap-1.5">👨‍🍳 Cara Memasak</h3>
+              <ol class="space-y-4">
+                ${recipe.steps.map((step, stepIdx) => `
+                  <li class="flex gap-3">
+                    <button onclick="toggleStepStatus(this)" class="flex-shrink-0 w-6 h-6 rounded-full border border-gray-200 text-[10px] font-bold text-gray-400 hover:border-brand-500 hover:text-brand-600 flex items-center justify-center bg-white transition-all">
+                      ${stepIdx + 1}
+                    </button>
+                    <p class="text-sm text-gray-600 leading-relaxed pt-0.5 step-text">${step}</p>
+                  </li>
+                `).join('')}
+              </ol>
+            </div>
+
+            <!-- TIPS AND INFO (ACCORDION CARDS) -->
+            <div class="space-y-3 pt-4 border-t border-gray-100">
+              <div class="p-4 bg-amber-50/50 border border-amber-100 rounded-xl">
+                <span class="font-bold text-xs text-amber-900 flex items-center gap-1 mb-1">💡 Tips Penyimpanan Hidangan</span>
+                <ul class="list-disc list-inside space-y-1 text-xs text-amber-800">
+                  ${recipe.storageTips.map(t => `<li>${t}</li>`).join('')}
+                </ul>
+              </div>
+
+              <div class="p-4 bg-blue-50/50 border border-blue-100 rounded-xl">
+                <span class="font-bold text-xs text-blue-900 flex items-center gap-1 mb-1">👶 Tips Untuk Buah Hati</span>
+                <ul class="list-disc list-inside space-y-1 text-xs text-blue-800">
+                  ${recipe.kidTips.map(t => `<li>${t}</li>`).join('')}
+                </ul>
+              </div>
+
+              <div class="p-4 bg-gray-50 border border-gray-100 rounded-xl space-y-2">
+                <span class="font-bold text-xs text-gray-900 flex items-center gap-1">🍎 Nilai Gizi Sederhana</span>
+                <div class="grid grid-cols-3 gap-2 text-[10px]">
+                  <div class="bg-white p-2 rounded-lg border border-gray-100"><span class="font-bold block text-gray-900">Protein</span><span class="text-gray-500 mt-0.5 block">${recipe.nutrition.protein}</span></div>
+                  <div class="bg-white p-2 rounded-lg border border-gray-100"><span class="font-bold block text-gray-900">Karbohidrat</span><span class="text-gray-500 mt-0.5 block">${recipe.nutrition.carbs}</span></div>
+                  <div class="bg-white p-2 rounded-lg border border-gray-100"><span class="font-bold block text-gray-900">Sayur & Serat</span><span class="text-gray-500 mt-0.5 block">${recipe.nutrition.fiber}</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ESTIMATED BUDGET BREAKDOWN -->
+        <div class="bg-gray-50/50 px-6 py-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-4 text-xs">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="font-bold text-gray-700">Rincian Anggaran:</span>
+            ${recipe.costDetails.map(d => `
+              <span class="bg-white border border-gray-200 text-gray-600 px-2 py-1 rounded-lg">
+                ${d.name}: <strong>Rp${d.price.toLocaleString('id-ID')}</strong>
+              </span>
+            `).join('')}
+          </div>
+          <button onclick="copyRecipeToClipboard(${recipe.id})" class="text-brand-700 hover:text-brand-800 font-bold flex items-center gap-1">
+            📋 Salin Resep
+          </button>
+        </div>
+      `;
+
+      // Perform rescaled ingredients injection
+      renderIngredients();
+    }
+
+    // Interactive step strikethrough helper
+    function toggleStepStatus(btn) {
+      const stepText = btn.nextElementSibling;
+      if (btn.classList.contains('bg-brand-600')) {
+        // Reset to normal
+        btn.className = "flex-shrink-0 w-6 h-6 rounded-full border border-gray-200 text-[10px] font-bold text-gray-400 hover:border-brand-500 hover:text-brand-600 flex items-center justify-center bg-white transition-all";
+        btn.innerHTML = btn.innerText; // Keep step number
+        stepText.classList.remove('line-through', 'text-gray-300');
+        stepText.classList.add('text-gray-600');
+      } else {
+        // Mark as completed
+        btn.className = "flex-shrink-0 w-6 h-6 rounded-full border border-brand-600 text-[10px] font-bold text-white flex items-center justify-center bg-brand-600 transition-all";
+        btn.innerHTML = '✓';
+        stepText.classList.add('line-through', 'text-gray-300');
+        stepText.classList.remove('text-gray-600');
+      }
+    }
+
+    // Toggle Cooked (favorite/done)
+    function toggleCookedStatus(id) {
+      if (cookedDays.has(id)) {
+        cookedDays.delete(id);
+      } else {
+        cookedDays.add(id);
+      }
+      
+      // Re-load to update dynamic class
+      loadRecipe(id);
+      renderDaysList();
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const cookedCount = cookedDays.size;
+      document.getElementById('progressText').innerText = `${cookedCount}/30`;
+      
+      const percentage = (cookedCount / 30) * 100;
+      // dasharray of circle radius 20 is 2*PI*r = ~125.6
+      const offset = 125.6 - (125.6 * percentage) / 100;
+      document.getElementById('progressCircle').setAttribute('stroke-dashoffset', offset);
+    }
+
+    // ----------------------------------------------------
+    // CLIPBOARD EXPORT FOR RECIPES
+    // ----------------------------------------------------
+    function copyRecipeToClipboard(id) {
+      const recipe = menuData.find(r => r.id === id);
+      if (!recipe) return;
+
+      const scale = currentPortion / 4;
+      let text = `🍳 RESEP HARIAN BUNYI - HARI ${recipe.id}: ${recipe.name}\n`;
+      text += `Porsi: Untuk ${currentPortion} Orang (Skala x${scale})\n`;
+      text += `Jenis: ${recipe.type} | Total Biaya: Rp${Math.round(recipe.cost * scale).toLocaleString('id-ID')}\n\n`;
+      
+      text += `🔥 BAHAN PROTEIN:\n`;
+      recipe.proteins.forEach(p => text += `- ${p.qty * scale} ${p.unit} ${p.name}\n`);
+      
+      text += `\n🥬 BAHAN SAYUR:\n`;
+      recipe.veggies.forEach(v => text += `- ${v.qty * scale} ${v.unit} ${v.name}\n`);
+      
+      text += `\n🧂 BUMBU:\n`;
+      recipe.spices.forEach(s => text += `- ${s.qty * scale} ${s.unit} ${s.name}\n`);
+      
+      text += `\n👨‍🍳 TAHAPAN MEMASAK:\n`;
+      recipe.steps.forEach((step, idx) => text += `${idx+1}. ${step}\n`);
+
+      text += `\n💡 TIPS UNTUK ANAK:\n`;
+      recipe.kidTips.forEach(t => text += `- ${t}\n`);
+
+      // Write to Clipboard using legacy input approach for iframe friendliness
+      const tempInput = document.createElement("textarea");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      // Trigger custom UI Toast
+      showToast("Resep berhasil disalin!");
+    }
+
+    // ----------------------------------------------------
+    // WEEKLY GROCERY RECAP RENDERER
+    // ----------------------------------------------------
+    function renderGroceries() {
+      const container = document.getElementById('grocery-lists');
+      container.innerHTML = '';
+
+      weeklyGroceries.forEach((w, idx) => {
+        const div = document.createElement('div');
+        div.className = "bg-gray-50 border border-gray-100 rounded-2xl p-5 space-y-4";
+        div.innerHTML = `
+          <div class="flex items-center justify-between border-b border-gray-200 pb-2.5">
+            <span class="font-bold text-sm text-gray-900">${w.week}</span>
+            <span class="bg-brand-100 text-brand-800 text-[10px] font-bold px-2 py-0.5 rounded">Rata-rata: Rp${w.average.toLocaleString('id-ID')}/Hari</span>
+          </div>
+          
+          <div class="space-y-3 text-xs">
+            <div>
+              <span class="font-extrabold text-[10px] uppercase text-gray-400 tracking-wider">🥩 Protein Hewani</span>
+              <ul class="list-disc list-inside text-gray-600 mt-1 space-y-1">
+                ${w.proteinHewani.map(p => `<li>${p}</li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <span class="font-extrabold text-[10px] uppercase text-gray-400 tracking-wider">🌱 Protein Nabati</span>
+              <ul class="list-disc list-inside text-gray-600 mt-1 space-y-1">
+                ${w.proteinNabati.map(p => `<li>${p}</li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <span class="font-extrabold text-[10px] uppercase text-gray-400 tracking-wider">🥬 Sayuran Sehat</span>
+              <ul class="list-disc list-inside text-gray-600 mt-1 space-y-1">
+                ${w.veggies.map(v => `<li>${v}</li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <span class="font-extrabold text-[10px] uppercase text-gray-400 tracking-wider">🧂 Stok Bumbu Dasar</span>
+              <ul class="list-disc list-inside text-gray-600 mt-1 space-y-1">
+                ${w.spices.map(s => `<li>${s}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-gray-200 flex justify-between items-center text-xs">
+            <span class="text-gray-500">Estimasi Total Belanja:</span>
+            <span class="font-bold text-gray-950 text-sm">Rp${w.total.toLocaleString('id-ID')}</span>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // ----------------------------------------------------
+    // GUIDE SECTION RENDERING
+    // ----------------------------------------------------
+    function selectGuide(id) {
+      // Manage guide buttons active state
+      const buttons = ['bumbu', 'sayur', 'protein', 'mealprep', 'energy', 'kids'];
+      buttons.forEach(b => {
+        const el = document.getElementById(`btn-guide-${b}`);
+        if (b === id) {
+          el.className = "w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all bg-brand-50 text-brand-700";
+        } else {
+          el.className = "w-full text-left px-3 py-2 rounded-xl text-sm font-semibold transition-all hover:bg-gray-50 text-gray-600";
+        }
+      });
+
+      const guide = guideData[id];
+      const container = document.getElementById('guide-content-area');
+      container.innerHTML = `
+        <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+          ${guide.title}
+        </h2>
+        <div class="pt-3">
+          ${guide.content}
+        </div>
+      `;
+    }
+
+    // ----------------------------------------------------
+    // COOKING TIMER FUNCTIONALITIES
+    // ----------------------------------------------------
+    function setTimerFromRecipe() {
+      // Get the duration from currently active recipe
+      const recipe = menuData.find(r => r.id === activeRecipeId);
+      if (!recipe) return;
+
+      // Extract duration (e.g. "35 menit" -> 35 * 60)
+      const matches = recipe.time.match(/\d+/);
+      const minutes = matches ? parseInt(matches[0]) : 5;
+      
+      timerDuration = minutes * 60;
+      updateTimerDisplay();
+      
+      // Make timer expand instantly if hidden
+      const el = document.getElementById('global-timer');
+      el.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-32');
+      el.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timerDuration / 60);
+      const seconds = timerDuration % 60;
+      const displayStr = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      document.getElementById('timer-display').innerText = displayStr;
+    }
+
+    function toggleTimer() {
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        document.getElementById('timer-toggle-btn').innerText = "Mulai";
+        document.getElementById('timer-toggle-btn').className = "bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-all";
+      } else {
+        timerInterval = setInterval(() => {
+          if (timerDuration > 0) {
+            timerDuration--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            document.getElementById('timer-toggle-btn').innerText = "Mulai";
+            playAlarm();
+            showToast("⏱️ Waktu memasak telah selesai! Periksa hidangan Anda di kompor.");
+          }
+        }, 1000);
+        timerRunning = true;
+        document.getElementById('timer-toggle-btn').innerText = "Jeda";
+        document.getElementById('timer-toggle-btn').className = "bg-amber-600 hover:bg-amber-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-all";
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerDuration = 300; // Reset to 5 mins
+      updateTimerDisplay();
+      document.getElementById('timer-toggle-btn').innerText = "Mulai";
+      document.getElementById('timer-toggle-btn').className = "bg-brand-600 hover:bg-brand-500 text-white text-xs font-bold px-4 py-1.5 rounded-lg transition-all";
+    }
+
+    function adjustTimer(secs) {
+      if (timerDuration + secs < 1) return;
+      timerDuration += secs;
+      updateTimerDisplay();
+    }
+
+    function toggleTimerCollapse() {
+      const ext = document.getElementById('timer-expanded');
+      ext.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
